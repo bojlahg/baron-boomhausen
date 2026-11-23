@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sound Effects · Baron Boomhausen</title>
+  </head>
+  <body>
+    <main class="app soundboard">
+      <header class="soundboard-header">
+        <div>
+          <a class="soundboard-back" href="./index.html">‹ Baron Boomhausen</a>
+          <h1>Sound Effects</h1>
+        </div>
+        <button id="stop-preview" class="action" type="button">Stop</button>
+      </header>
+      <div class="preview-level">
+        <label for="preview-volume">Preview Volume</label>
+        <input id="preview-volume" type="range" min="0" max="100" value="50" aria-valuetext="50%">
+        <output id="preview-level" for="preview-volume">50%</output>
+      </div>
+      <section class="whistle-preview" aria-labelledby="whistle-title">
+        <h2 id="whistle-title">Flight Whistle</h2>
+        <div class="whistle-actions">
+          <button class="action" type="button" data-whistle="slow" aria-label="Play Slow Flight Whistle">Slow</button>
+          <button class="action" type="button" data-whistle="fast" aria-label="Play Fast Flight Whistle">Fast</button>
+          <button class="action flyby" type="button" data-whistle="flyby" aria-label="Play Flight Whistle Flyby">Flyby</button>
+        </div>
+      </section>
+      <ul id="sound-list" class="sound-list" aria-label="Game sound effects"></ul>
+      <p id="preview-status" class="preview-status" role="status"></p>
+    </main>
+    <script type="module" src="/src/sounds.ts"></script>
+  </body>
+</html>

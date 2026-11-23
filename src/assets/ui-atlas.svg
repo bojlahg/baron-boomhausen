@@ -1,0 +1,249 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="602" viewBox="0 0 1024 602">
+  <title>Baron Boomhausen UI sprites</title>
+  <svg id="button-launch-idle" x="8" y="8" width="156" height="54" viewBox="0 0 156 54" overflow="hidden">
+    <rect fill="#371945" x="1" y="9" width="154" height="44" rx="14"/>
+    <rect fill="#ffd51a" x="1" y="3" width="154" height="43" rx="14"/>
+  </svg>
+  <svg id="button-launch-hover" x="178" y="8" width="156" height="54" viewBox="0 0 156 54" overflow="hidden">
+    <rect fill="#371945" x="1" y="9" width="154" height="44" rx="14"/>
+    <rect fill="#fff080" x="1" y="2" width="154" height="44" rx="14"/>
+  </svg>
+  <svg id="button-launch-pressed" x="348" y="8" width="156" height="54" viewBox="0 0 156 54" overflow="hidden">
+    <rect fill="#371945" x="1" y="9" width="154" height="44" rx="14"/>
+    <rect fill="#ffa32a" x="1" y="8" width="154" height="43" rx="14"/>
+  </svg>
+  <svg id="button-launch-disabled" x="518" y="8" width="156" height="54" viewBox="0 0 156 54" overflow="hidden">
+    <rect fill="#85718f" x="1" y="9" width="154" height="44" rx="14"/>
+    <rect fill="#d9ccde" x="1" y="4" width="154" height="42" rx="14"/>
+  </svg>
+  <svg id="button-secondary" x="688" y="8" width="156" height="54" viewBox="0 0 156 54" overflow="hidden">
+    <rect fill="#371945" x="1" y="9" width="154" height="44" rx="14"/>
+    <rect fill="#fff5df" x="1" y="3" width="154" height="43" rx="14"/>
+  </svg>
+  <svg id="button-active-item" x="858" y="8" width="156" height="54" viewBox="0 0 156 54" overflow="hidden">
+    <rect fill="#371945" x="1" y="9" width="154" height="44" rx="14"/>
+    <rect fill="#6ed79d" x="1" y="3" width="154" height="43" rx="14"/>
+  </svg>
+  <svg id="panel-toolbar" x="8" y="78" width="344" height="100" viewBox="0 0 344 100" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="342" height="94" rx="17"/>
+    <rect fill="#371945" x="1" y="1" width="342" height="93" rx="17"/>
+  </svg>
+  <svg id="panel-minimap" x="368" y="78" width="216" height="120" viewBox="0 0 216 120" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="214" height="114" rx="17"/>
+    <rect fill="#fff5df" x="1" y="1" width="214" height="113" rx="17"/>
+    <rect fill="#d6f2fc" x="8" y="8" width="200" height="96" rx="12"/>
+    <path fill="#9fdec5" d="M9 83 Q47 62 79 85 Q112 89 137 71 Q169 48 207 75 V92 Q207 104 195 104 H21 Q9 104 9 92 Z"/>
+    <path fill="#69bc9a" d="M9 93 Q43 84 85 94 Q145 102 207 87 V92 Q207 104 195 104 H21 Q10 104 9 93 Z"/>
+  </svg>
+  <svg id="panel-result" x="600" y="78" width="224" height="148" viewBox="0 0 224 148" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="222" height="142" rx="17"/>
+    <rect fill="#fff5df" x="1" y="1" width="222" height="141" rx="17"/>
+    <path fill="#ffd51a" d="M1 31 V19 Q1 1 19 1 H205 Q223 1 223 19 V31 Z"/>
+  </svg>
+  <svg id="panel-counter" x="840" y="78" width="176" height="64" viewBox="0 0 176 64" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="174" height="58" rx="17"/>
+    <rect fill="#fff5df" x="1" y="1" width="174" height="57" rx="17"/>
+    <rect fill="#ffd51a" x="15" y="13" width="7" height="31" rx="3.5"/>
+  </svg>
+  <svg id="panel-record-toast" x="840" y="149" width="176" height="70" viewBox="0 0 176 70" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="174" height="64" rx="17"/>
+    <rect fill="#fff5df" x="1" y="1" width="174" height="63" rx="17"/>
+    <rect fill="#ff625f" x="15" y="13" width="7" height="37" rx="3.5"/>
+  </svg>
+  <svg id="panel-dialog" x="8" y="236" width="260" height="156" viewBox="0 0 260 156" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="258" height="150" rx="17"/>
+    <rect fill="#fff5df" x="1" y="1" width="258" height="149" rx="17"/>
+    <path fill="#ff625f" d="M1 35 V19 Q1 1 19 1 H241 Q259 1 259 19 V35 Z"/>
+  </svg>
+  <svg id="panel-loadout" x="284" y="236" width="336" height="68" viewBox="0 0 336 68" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="334" height="62" rx="17"/>
+    <rect fill="#f5e7cf" x="1" y="1" width="334" height="61" rx="17"/>
+  </svg>
+  <svg id="panel-tooltip" x="634" y="236" width="168" height="58" viewBox="0 0 168 58" overflow="hidden">
+    <rect fill="#371945" x="1" y="1" width="166" height="46" rx="11"/>
+    <path fill="#371945" d="M30 45 H49 L39 56 Z"/>
+  </svg>
+  <svg id="panel-reward-toast" x="820" y="236" width="196" height="66" viewBox="0 0 196 66" overflow="hidden">
+    <rect fill="#371945" x="1" y="5" width="194" height="60" rx="17"/>
+    <rect fill="#fff5df" x="1" y="1" width="194" height="59" rx="17"/>
+    <rect fill="#6ed79d" x="15" y="13" width="7" height="33" rx="3.5"/>
+  </svg>
+  <svg id="inventory-slot" x="284" y="318" width="64" height="64" viewBox="0 0 64 64" overflow="hidden">
+    <rect fill="#a680ad" x="1" y="1" width="62" height="62" rx="13"/>
+    <rect fill="#fff5df" x="5" y="5" width="54" height="50" rx="10"/>
+  </svg>
+  <svg id="inventory-slot-selected" x="360" y="318" width="64" height="64" viewBox="0 0 64 64" overflow="hidden">
+    <rect fill="#80187e" x="1" y="1" width="62" height="62" rx="13"/>
+    <rect fill="#ffd51a" x="5" y="5" width="54" height="50" rx="10"/>
+  </svg>
+  <svg id="inventory-slot-locked" x="436" y="318" width="64" height="64" viewBox="0 0 64 64" overflow="hidden">
+    <rect fill="#85718f" x="1" y="1" width="62" height="62" rx="13"/>
+    <rect fill="#d9ccde" x="5" y="5" width="54" height="50" rx="10"/>
+  </svg>
+  <svg id="inventory-slot-drag" x="512" y="318" width="64" height="64" viewBox="0 0 64 64" overflow="hidden">
+    <rect fill="#53bb91" x="1" y="1" width="62" height="62" rx="13"/>
+    <rect fill="#d6f3e3" x="5" y="5" width="54" height="50" rx="10"/>
+  </svg>
+  <svg id="slider-track" x="596" y="329" width="168" height="34" viewBox="0 0 168 34" overflow="hidden">
+    <rect fill="#371945" x="2" y="10" width="164" height="14" rx="7"/>
+    <rect fill="#a680ad" x="6" y="14" width="156" height="6" rx="3"/>
+  </svg>
+  <svg id="slider-thumb" x="774" y="324" width="46" height="44" viewBox="0 0 46 44" overflow="hidden">
+    <circle fill="#371945" cx="23" cy="24" r="19"/>
+    <circle fill="#ffd51a" cx="23" cy="20" r="18"/>
+    <path fill="none" d="M20 15 V25 M26 15 V25" stroke="#371945" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="toggle-off" x="832" y="328" width="78" height="37" viewBox="0 0 78 37" overflow="hidden">
+    <rect fill="#85718f" x="1" y="1" width="76" height="35" rx="17.5"/>
+    <circle fill="#fff5df" cx="19" cy="18.5" r="13"/>
+  </svg>
+  <svg id="toggle-on" x="924" y="328" width="78" height="37" viewBox="0 0 78 37" overflow="hidden">
+    <rect fill="#267c67" x="1" y="1" width="76" height="35" rx="17.5"/>
+    <circle fill="#6ed79d" cx="59" cy="18.5" r="13"/>
+  </svg>
+  <svg id="icon-launch" x="8" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ffd51a" d="M26 5 L29 17 L41 13 L35 24 L44 30 L31 32 L30 43 L22 35 L13 42 L14 31 L4 26 L15 21 L10 11 L22 16 Z" stroke="#371945" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle fill="#ff625f" cx="24" cy="26" r="5"/>
+  </svg>
+  <svg id="icon-restart" x="72" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M13 15 A15 15 0 1 1 10 31 M12 8 V17 H21" stroke="#371945" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill="#ff625f" d="M24 20 L31 24 L24 29 Z"/>
+  </svg>
+  <svg id="icon-home" x="136" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ff625f" d="M8 24 L24 9 L40 24 L35 24 V39 H13 V24 Z"/>
+    <path fill="none" d="M8 24 L24 9 L40 24 M14 23 V38 H34 V23 M21 38 V29 H27 V38" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-wig" x="200" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#e4b77d" d="M9 26 Q6 13 18 10 Q23 7 28 12 Q39 12 40 24 L36 36 L28 34 L24 38 L14 35 Z"/>
+    <path fill="#fff5df" d="M11 23 Q11 14 21 13 Q27 11 30 16 Q37 15 39 23 L36 29 L30 25 L24 29 L18 25 L13 29 Z"/>
+    <path fill="none" d="M17 31 Q21 34 19 36 M28 30 Q32 34 30 36" stroke="#371945" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-altitude" x="264" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#6ed79d" d="M6 38 L20 17 L27 29 L32 22 L42 38 Z"/>
+    <path fill="none" d="M7 37 L20 17 L28 29 L33 22 L41 37 M33 17 V5 M28 10 L33 5 L38 10" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-distance" x="328" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M8 24 H40 M8 15 V33 M40 15 V33 M18 18 L12 24 L18 30 M30 18 L36 24 L30 30" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#ff625f" cx="24" cy="24" r="3"/>
+  </svg>
+  <svg id="icon-record" x="392" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ffd51a" d="M17 8 H31 V18 Q31 26 24 29 Q17 26 17 18 Z"/>
+    <path fill="none" d="M17 8 H31 V18 Q31 26 24 29 Q17 26 17 18 Z M17 12 H10 Q10 20 17 22 M31 12 H38 Q38 20 31 22 M24 29 V37 M16 39 H32" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-moon" x="456" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <circle fill="#ffd51a" cx="24" cy="24" r="16"/>
+    <circle fill="#ffe994" cx="18" cy="17" r="4"/>
+    <circle fill="#ffe994" cx="29" cy="24" r="3.5"/>
+    <circle fill="#ffe994" cx="21" cy="31" r="2.5"/>
+    <path fill="none" d="M24 8 A16 16 0 1 0 24 40 A16 16 0 1 0 24 8" stroke="#371945" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-map" x="520" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#6ed79d" d="M8 13 L18 10 L30 15 L40 11 V35 L30 39 L18 34 L8 37 Z"/>
+    <path fill="none" d="M8 13 L18 10 L30 15 L40 11 V35 L30 39 L18 34 L8 37 Z M18 10 V34 M30 15 V39" stroke="#371945" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-follow" x="584" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M9 18 V9 H18 M30 9 H39 V18 M39 30 V39 H30 M18 39 H9 V30" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#ff625f" cx="24" cy="24" r="8"/>
+    <circle fill="#371945" cx="24" cy="24" r="3"/>
+  </svg>
+  <svg id="icon-pan" x="648" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M24 7 V41 M7 24 H41 M19 12 L24 7 L29 12 M19 36 L24 41 L29 36 M12 19 L7 24 L12 29 M36 19 L41 24 L36 29" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#6ed79d" cx="24" cy="24" r="4"/>
+  </svg>
+  <svg id="icon-trail" x="712" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M7 37 Q14 15 40 12" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6"/>
+    <circle fill="#ff625f" cx="38" cy="12" r="4.5"/>
+  </svg>
+  <svg id="icon-zoom-in" x="776" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M29 29 L41 41 M14 20 H26 M20 14 V26 M20 8 A12 12 0 1 0 20 32 A12 12 0 1 0 20 8" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-zoom-out" x="840" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M29 29 L41 41 M14 20 H26 M20 8 A12 12 0 1 0 20 32 A12 12 0 1 0 20 8" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-sound" x="904" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ff625f" d="M9 19 H16 L25 12 V36 L16 29 H9 Z"/>
+    <path fill="none" d="M9 19 H16 L25 12 V36 L16 29 H9 Z M31 19 Q37 24 31 29 M36 14 Q46 24 36 34" stroke="#371945" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-muted" x="968" y="418" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#c8b5cb" d="M9 19 H16 L25 12 V36 L16 29 H9 Z"/>
+    <path fill="none" d="M9 19 H16 L25 12 V36 L16 29 H9 Z M31 19 L40 29 M31 29 L40 19" stroke="#371945" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-lock" x="8" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <rect fill="#e1d1e3" x="11" y="20" width="26" height="20" rx="5"/>
+    <path fill="none" d="M16 20 V16 A8 8 0 0 1 32 16 V20 M24 29 V34 M11 24 Q11 20 16 20 H32 Q37 20 37 24 V35 Q37 40 32 40 H16 Q11 40 11 35 Z" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-check" x="72" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <circle fill="#6ed79d" cx="24" cy="24" r="17"/>
+    <path fill="none" d="M15 25 L21 31 L33 17" stroke="#371945" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-close" x="136" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M13 13 L35 35 M35 13 L13 35" stroke="#371945" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-pause" x="200" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <rect fill="#371945" x="13" y="11" width="8" height="26" rx="3"/>
+    <rect fill="#371945" x="27" y="11" width="8" height="26" rx="3"/>
+  </svg>
+  <svg id="icon-play" x="264" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#371945" d="M16 10 Q14 10 14 13 V35 Q14 38 17 37 L36 26 Q39 24 36 22 Z"/>
+  </svg>
+  <svg id="icon-rotate" x="328" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="none" d="M16 34 A13 13 0 1 1 35 20 M34 11 L36 21 L26 21 M12 36 H36" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill="#ff625f" d="M21 26 L26 20 L31 26 Z"/>
+  </svg>
+  <svg id="icon-stopwatch" x="392" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <circle fill="#fff5df" cx="24" cy="28" r="13"/>
+    <path fill="none" d="M24 15 A13 13 0 1 0 24 41 A13 13 0 1 0 24 15 M24 15 V8 M19 8 H29 M24 28 L30 24 M33 17 L37 13" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-inventory" x="456" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ffd51a" d="M9 19 L24 12 L39 19 V34 L24 41 L9 34 Z"/>
+    <path fill="none" d="M9 19 L24 12 L39 19 V34 L24 41 L9 34 Z M9 19 L24 26 L39 19 M24 26 V41 M17 16 L31 23" stroke="#371945" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="icon-achievement" x="520" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ff625f" d="M17 25 L13 41 L22 38 L24 42 L27 32 L33 42 L36 39 L40 40 L34 25 Z"/>
+    <circle fill="#ffd51a" cx="25" cy="19" r="13"/>
+    <path fill="#371945" d="M25 11 L27 16 L33 17 L29 21 L30 26 L25 23 L20 26 L21 21 L17 17 L23 16 Z"/>
+  </svg>
+  <svg id="icon-help" x="584" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <circle fill="#fff5df" cx="24" cy="24" r="17"/>
+    <path fill="none" d="M24 7 A17 17 0 1 0 24 41 A17 17 0 1 0 24 7 M19 19 Q20 14 25 14 Q30 14 30 19 Q30 22 27 24 Q24 26 24 28" stroke="#371945" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#371945" cx="24" cy="34" r="1.7"/>
+  </svg>
+  <svg id="icon-duck" x="648" y="482" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path d="M5 31 L10 33 L8 25 Q15 30 25 27 L25 21 Q24 11 32 11 Q39 11 39 18 L46 19 L43 24 L38 24 Q36 36 26 38 Q15 40 5 31 Z" fill="#ffd51a" stroke="#371945" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M26 26 L26 21 Q25 12 32 12 Q38 12 38 18 L37 24 Q34 29 26 26 Z" fill="#58ba91"/>
+    <path d="M15 32 Q22 36 27 30" fill="none" stroke="#371945" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="17" r="1.8" fill="#371945"/>
+  </svg>
+  <svg id="tutorial-hand" x="708" y="482" width="64" height="72" viewBox="0 0 64 72" overflow="hidden">
+    <path fill="#371945" opacity=".22" d="M19 9 Q27 6 30 14 L31 29 Q41 24 48 30 Q58 30 59 42 L58 57 Q57 65 50 65 V70 H27 V63 Q20 60 16 52 L7 41 Q4 34 12 32 L18 36 Z"/>
+    <path fill="#fff5df" stroke="#371945" stroke-width="3.5" stroke-linejoin="round" d="M21 61 V56 Q15 54 12 47 L5 38 Q2 33 5 30 Q8 27 13 31 L17 34 V11 Q17 4 23 4 Q29 4 29 11 V28 Q34 24 39 28 Q46 25 50 31 Q57 31 57 38 V47 Q57 54 50 58 V63 Z"/>
+    <path d="M11 34 L19 42 M30 29 V37 M40 29 V37 M49 32 V38" fill="none" stroke="#d69c71" stroke-width="2.3" stroke-linecap="round"/>
+    <path fill="#6ed79d" stroke="#371945" stroke-width="3.5" stroke-linejoin="round" d="M22 57 H51 V67 H22 Z"/>
+    <path d="M43 62 H47" fill="none" stroke="#ffd51a" stroke-width="2.6" stroke-linecap="round"/>
+  </svg>
+  <svg id="marker-start" x="8" y="546" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ff625f" d="M24 6 C13 6 7 13 7 23 Q7 31 24 43 Q41 31 41 23 C41 13 35 6 24 6 Z" stroke="#371945" stroke-width="2.5"/>
+    <path fill="#fff5df" d="M16 29 L26 14 L31 16 L22 30 Z M22 30 H33 V33 H15 Z"/>
+  </svg>
+  <svg id="marker-baron" x="72" y="546" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#ffd51a" d="M24 6 C13 6 7 13 7 23 Q7 31 24 43 Q41 31 41 23 C41 13 35 6 24 6 Z" stroke="#371945" stroke-width="2.5"/>
+    <path fill="#371945" d="M16 24 L19 17 L24 20 L29 17 L33 24 Q24 30 16 24 Z"/>
+    <circle fill="#371945" cx="25" cy="30" r="3"/>
+  </svg>
+  <svg id="marker-moon" x="136" y="546" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#fff5df" d="M24 6 C13 6 7 13 7 23 Q7 31 24 43 Q41 31 41 23 C41 13 35 6 24 6 Z" stroke="#371945" stroke-width="2.5"/>
+    <circle fill="#ffd51a" cx="24" cy="23" r="9"/>
+    <circle fill="#ffa32a" cx="21" cy="20" r="2.5"/>
+    <circle fill="#ffa32a" cx="28" cy="25" r="2"/>
+  </svg>
+  <svg id="marker-reward" x="200" y="546" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#6ed79d" d="M24 6 C13 6 7 13 7 23 Q7 31 24 43 Q41 31 41 23 C41 13 35 6 24 6 Z" stroke="#371945" stroke-width="2.5"/>
+    <rect fill="#371945" x="16" y="18" width="16" height="12" rx="2"/>
+    <path fill="none" d="M24 18 V30 M16 22 H32" stroke="#ffd51a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="marker-blueprint" x="264" y="546" width="48" height="48" viewBox="0 0 48 48" overflow="hidden">
+    <path fill="#bceaff" d="M24 6 C13 6 7 13 7 23 Q7 31 24 43 Q41 31 41 23 C41 13 35 6 24 6 Z" stroke="#371945" stroke-width="2.5"/>
+    <path fill="#2473c6" d="M16 18 L31 16 L32 29 L17 31 Z"/>
+    <path fill="none" d="M20 23 H28 M20 26 H26" stroke="#fff5df" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</svg>

@@ -1,0 +1,21 @@
+.debug-panel {
+  margin-top: 15px;
+  padding: 12px;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  background: #422553;
+  color: var(--cream);
+}
+
+.debug-panel h2 { margin: 0 0 10px; font-size: 1rem; }
+.debug-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.debug-tools label { display: inline-flex; align-items: center; gap: 5px; font-size: .83rem; }
+.debug-tools input, .debug-tools select {
+  border: 1px solid #cda4d4;
+  border-radius: 7px;
+  padding: 5px 7px;
+  color: var(--ink);
+  background: var(--cream);
+}
+.debug-tools input { width: 6em; }
+.debug-panel p { margin: 10px 0 0; font-size: .83rem; }

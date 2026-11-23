@@ -1,0 +1,87 @@
+.soundboard {
+  width: min(870px, 100% - 28px);
+  padding: clamp(24px, 5vw, 58px) 0 30px;
+  color: var(--cream);
+}
+
+.soundboard-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.soundboard-header h1 {
+  margin: 5px 0 0;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 950;
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+.soundboard-back { color: var(--lemon); font-weight: 750; }
+.soundboard button:focus-visible, .soundboard a:focus-visible { outline-color: var(--lemon); }
+
+.preview-level {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 3rem;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 10px 13px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  background: #352044;
+}
+.preview-level input { width: 100%; margin: 0; accent-color: var(--lemon); }
+.preview-level output { text-align: right; font-variant-numeric: tabular-nums; }
+
+.whistle-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 2px solid #397f67;
+  border-radius: 12px;
+  background: #233f3f;
+}
+.whistle-preview h2 { margin: 0; font-size: 1.03rem; }
+.whistle-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.whistle-actions .action { min-height: 38px; }
+.flyby { background: #6ed79d; }
+
+.sound-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr));
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sound-card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 58px;
+  gap: 12px;
+  padding: 8px 11px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  color: var(--cream);
+  background: #422553;
+  text-align: left;
+  font-weight: 750;
+}
+.sound-card:hover, .sound-card:active { background: #543363; border-color: #946aa3; }
+.sound-play {
+  display: grid;
+  place-items: center;
+  flex: 0 0 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--lemon);
+  font-size: .72rem;
+}
+.preview-status { min-height: 1.3em; margin: 12px 0 0; color: #f1d7ea; font-size: .87rem; }

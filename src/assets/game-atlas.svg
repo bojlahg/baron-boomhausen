@@ -1,0 +1,538 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1008" viewBox="0 0 1024 1008">
+  <title>Baron Boomhausen game sprites</title>
+  <defs>
+    <g id="castle-art">
+    <path fill="#ffab72" d="M-42 10 V-20 H42 V9 Z"/>
+    <path fill="#ffd796" d="M-52 12 V-27 H-29 V9 Z M32 8 V-30 H54 V12 Z"/>
+    <path fill="#fff5df" d="M-16 6 V-54 H18 V6 Z"/>
+    <path fill="#80187e" d="M-18-53 L1-88 L20-53 Z M-55-27 L-41-60 L-26-27 Z M28-30 L43-63 L58-30 Z"/>
+    <path fill="#371945" d="M-9 6 V-2 A9 9 0 0 1 9-2 V6 Z M-3-41 A4 4 0 0 1 5-41 V-34 H-3 Z"/>
+    <path fill="#e68c59" d="M-44-22 H-39 V-15 H-44 Z M40-23 H45 V-16 H40 Z"/>
+    <path fill="#ffd51a" d="M0-87 V-101 L19-97 L13-94 L19-91 H2 V-87 Z M-42-59 V-73 L-23-68 L-30-65 L-42-66 Z M42-62 V-75 L60-71 L54-67 H44 V-62 Z"/>
+    </g>
+  </defs>
+  <svg id="baron-tails" x="8" y="8" width="112" height="78" viewBox="-108 -78 112 78" overflow="hidden">
+    <path fill="#80187e" d="M-7-70 Q-36-57-68-67 Q-88-68-100-49 Q-77-53-67-47 L-101-11 L-70-20 L-78-7 Q-59-16-25-25 L7-46 Z"/>
+    <path fill="#ffd51a" d="M-99-49 Q-86-62-77-62 L-67-52 Z M-101-11 L-89-26 L-16-55 L-3-51 L-34-35 Z"/>
+  </svg>
+  <svg id="baron-far-leg" x="132" y="8" width="80" height="68" viewBox="8 -52 80 68" overflow="hidden">
+    <path fill="#e6d7be" d="M14-45 L44-44 Q61-44 60-31 L56-19 L39-18 L37-30 L13-28 Z"/>
+    <path fill="#371945" d="M43-18 L61-20 L57-5 Q67 2 81-5 Q73 10 57 12 L43 6 Z"/>
+    <path fill="#ebad26" d="M51-11 L62-12 L61-5 L50-4 Z"/>
+  </svg>
+  <svg id="baron-near-leg" x="224" y="8" width="76" height="84" viewBox="-60 -53 76 84" overflow="hidden">
+    <path fill="#fff5df" d="M-31-43 Q-18-51 4-36 Q17-24 8-14 L0 1 L-20-8 L-12-26 L-30-19 L-43-29 Z"/>
+    <path fill="#80187e" d="M-38-27 L-24-17 L-38 12 Q-25 13-16 25 Q-33 32-53 17 L-45 1 Z"/>
+    <path fill="#ffd51a" d="M-43 9 L-33 12 L-36 22 L-46 18 Z M-41 13 L-42 16 L-38 18 L-37 14 Z"/>
+  </svg>
+  <svg id="baron-coat" x="312" y="8" width="86" height="85" viewBox="-40 -115 86 85" overflow="hidden">
+    <path fill="#80187e" d="M-31-98 Q-9-104 7-89 L39-69 L41-50 Q24-41 3-43 L-13-39 L-26-51 L-34-77 Z"/>
+    <path fill="#371945" d="M-25-84 L-5-58 L12-51 L8-45 L-12-48 Z M15-83 L31-76 L32-57 L23-49 Z"/>
+    <path fill="#ffb549" d="M21-83 L29-81 L22-51 L17-53 Z"/>
+    <path fill="#fff5df" d="M-4-104 L19-106 L37-96 L32-93 L40-87 L33-81 L22-82 L20-75 L13-84 L10-81 L3-97 Z"/>
+    <circle fill="#ffd51a" cx="5" cy="-55" r="2.5"/>
+    <circle fill="#ffd51a" cx="-1" cy="-61" r="2.5"/>
+  </svg>
+  <svg id="baron-head" x="410" y="8" width="120" height="75" viewBox="-54 -164 120 75" overflow="hidden">
+    <path fill="#f6d6a1" d="M-42-110 Q-55-121-43-135 Q-32-153-12-148 L-6-118 L-18-98 Q-29-86-44-90 Q-57-93-50-106 Z"/>
+    <circle fill="#fff5df" cx="-37" cy="-122" r="10"/>
+    <circle fill="#dcb587" cx="-35" cy="-123" r="5"/>
+    <circle fill="#fff5df" cx="-35" cy="-124" r="2.7"/>
+    <circle fill="#fff5df" cx="-24" cy="-135" r="8.5"/>
+    <circle fill="#dcb587" cx="-22" cy="-136" r="4"/>
+    <circle fill="#fff5df" cx="-41" cy="-102" r="7.5"/>
+    <path fill="#ffad87" d="M-27-131 Q-18-153 4-156 Q26-151 27-138 L24-132 Q36-131 33-124 L27-118 Q33-109 37-105 Q29-98 15-104 L5-97 Q-8-99-12-110 Q-24-108-28-121 Z"/>
+    <path fill="#fff5df" d="M-30-137 Q-44-143-38-153 Q-31-163-20-157 Q-10-151-15-142 Q-19-136-30-137 Z"/>
+    <path d="M-32-150 Q-27-157-23-150 Q-20-145-26-144" fill="none" stroke="#dcb587" stroke-width="3" stroke-linecap="round"/>
+    <path fill="#fa765c" d="M24-140 Q37-148 42-137 Q49-130 41-126 Q31-120 23-125 Q20-131 24-140 Z"/>
+    <path fill="#371945" d="M26-128 Q38-121 49-128 Q55-132 48-137 Q59-138 58-128 Q56-114 36-116 L24-122 Q13-110 1-117 Q-11-123-1-130 Q-5-120 5-122 Q14-124 18-131 Z"/>
+  </svg>
+  <svg id="baron-hat" x="542" y="8" width="164" height="96" viewBox="-116 -209 164 96" overflow="hidden">
+    <path fill="#ff625f" d="M-109-139 Q-126-170-100-192 L-83-194 L-92-197 Q-68-212-48-193 L-54-203 Q-31-200-19-181 Q-46-175-65-157 L-64-166 L-81-151 L-87-159 L-90-145 L-108-134 Z"/>
+    <path fill="#ea4658" d="M-111-161 Q-85-191-46-181 Q-92-187-111-161 Z"/>
+    <path fill="#371945" d="M-86-133 Q-70-144-59-169 Q-42-188-28-191 L-2-171 Q5-181 18-201 Q25-188 33-172 Q34-155 12-155 Q-1-156-13-148 Q-43-127-65-111 Q-80-103-94-123 Z"/>
+    <path fill="#ffd51a" d="M-94-125 Q-79-136-67-157 Q-50-181-27-187 L-6-169 Q7-157 17-164 Q22-169 10-191 L19-195 Q36-166 25-158 Q12-147-7-160 L-29-174 Q-47-171-62-148 Q-77-123-88-117 Z"/>
+  </svg>
+  <svg id="baron-hand" x="718" y="8" width="38" height="34" viewBox="-19 -17 38 34" overflow="hidden">
+    <path fill="#ffac88" d="M-14-6 Q-8-12-3-8 Q-2-15 4-13 Q9-13 10-8 Q16-9 17-4 Q19 1 14 4 Q13 11 7 10 Q3 15-3 12 Q-9 15-13 9 Q-16 6-16 1 Z"/>
+    <path d="M1-1 Q6 1 7 6 M7-4 Q11-2 13 2" fill="none" stroke="#e77d69" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <svg id="moon" x="772" y="8" width="164" height="164" viewBox="-82 -82 164 164" overflow="hidden">
+    <circle r="78" fill="#f4a72e"/>
+    <circle cx="-2" cy="-2" r="74" fill="#ffcb48"/>
+    <path d="M-73 12 A74 74 0 0 1 67-27 Q40-51 4-54 Q-40-56-73 12 Z" fill="#ffe582"/>
+    <g fill="#d98729">
+      <ellipse cx="-46" cy="-30" rx="13" ry="10" transform="rotate(-24 -46 -30)"/>
+      <ellipse cx="-29" cy="26" rx="12" ry="10" transform="rotate(17 -29 26)"/>
+      <ellipse cx="-59" cy="15" rx="8" ry="7"/>
+      <ellipse cx="-32" cy="50" rx="7" ry="8"/>
+      <ellipse cx="40" cy="-27" rx="16" ry="13" transform="rotate(-24 40 -27)"/>
+      <ellipse cx="53" cy="23" rx="11" ry="9" transform="rotate(21 53 23)"/>
+      <ellipse cx="28" cy="45" rx="10" ry="8" transform="rotate(-27 28 45)"/>
+      <ellipse cx="28" cy="-57" rx="7" ry="6"/>
+      <ellipse cx="36" cy="3" rx="6" ry="7"/>
+    </g>
+    <g fill="#efa735">
+      <path d="M-56-26 Q-47-18-36-31 Q-39-20-49-21 Q-54-21-56-26 Z M-38 29 Q-29 35-19 28 Q-23 38-33 34 Z"/>
+      <path d="M26-24 Q40-15 53-33 Q51-19 42-17 Q32-14 26-24 Z M44 25 Q52 30 62 22 Q59 32 51 31 Z M20 48 Q27 52 36 43 Q33 53 26 53 Z"/>
+    </g>
+  </svg>
+  <svg id="moon-cut" x="944" y="8" width="54" height="164" viewBox="-27 -82 54 164" overflow="hidden">
+    <path d="M-18-75 L0-78 V78 L-14 77 L-15 61 L-10 49 L-18 35 L-15 24 L-21 9 L-15-6 L-22-22 L-15-35 L-19-49 L-13-58 Z" fill="#e89a34"/>
+    <path d="M0-78 L16-76 L11-66 L18-54 L14-41 L21-29 L15-16 L21-3 L13 10 L19 22 L13 36 L18 50 L12 61 L16 76 L0 78 Z" fill="#ffe683"/>
+    <g fill="#e7a74a">
+      <ellipse cx="6" cy="-55" rx="4" ry="7"/>
+      <ellipse cx="8" cy="-15" rx="4" ry="6"/>
+      <ellipse cx="5" cy="23" rx="3.5" ry="7"/>
+      <ellipse cx="7" cy="56" rx="4" ry="5"/>
+    </g>
+  </svg>
+  <svg id="duck-up" x="232" y="190" width="128" height="108" viewBox="-56 -66 128 108" overflow="hidden">
+    <path fill="#ffa32a" d="M-27 19 L-47 26 L-40 29 L-48 36 L-27 26 L-31 35 L-18 23 Z"/>
+    <path fill="#fff5df" d="M-50 8 Q-27 11-9-6 L10-11 L29-2 Q18 20-8 22 Q-31 29-51 13 L-42 13 Z"/>
+    <path fill="#a2432c" d="M8-12 L29-4 Q25 8 12 16 L1 2 Z"/>
+    <path fill="#218c68" d="M16-11 Q21-20 21-28 Q18-48 33-49 Q45-51 48-37 L48-23 Q39-13 30-17 L26-8 Z"/>
+    <path fill="#ffd51a" d="M45-37 L66-44 L65-35 L52-31 L65-25 L48-25 Z"/>
+    <path fill="#371945" d="M32-35 A5 5 0 0 1 42-35 H40 A3 3 0 0 0 34-35 Z"/>
+    <path fill="#fff1cb" d="M8-7 L-33-60 Q-46-54-32-36 L-45-42 Q-48-30-29-22 L-41-24 Q-38-12-22-11 L-32-8 Q-25 1-12-1 L-16 4 Z"/>
+  </svg>
+  <svg id="duck-down" x="372" y="190" width="128" height="108" viewBox="-56 -66 128 108" overflow="hidden">
+    <path fill="#ffa32a" d="M-27 19 L-47 26 L-40 29 L-48 36 L-27 26 L-31 35 L-18 23 Z"/>
+    <path fill="#fff5df" d="M-50 8 Q-27 11-9-6 L10-11 L29-2 Q18 20-8 22 Q-31 29-51 13 L-42 13 Z"/>
+    <path fill="#a2432c" d="M8-12 L29-4 Q25 8 12 16 L1 2 Z"/>
+    <path fill="#218c68" d="M16-11 Q21-20 21-28 Q18-48 33-49 Q45-51 48-37 L48-23 Q39-13 30-17 L26-8 Z"/>
+    <path fill="#ffd51a" d="M45-37 L66-44 L65-35 L52-31 L65-25 L48-25 Z"/>
+    <path fill="#371945" d="M32-35 A5 5 0 0 1 42-35 H40 A3 3 0 0 0 34-35 Z"/>
+    <path fill="#fff1cb" d="M12 4 Q-6 16-35 23 L-28 27 L-44 36 L-23 34 L-27 41 Q-12 40-4 34 Q14 30 18 15 Z"/>
+  </svg>
+  <svg id="cloud" x="630" y="190" width="158" height="48" viewBox="-2 -46 158 48" overflow="hidden">
+    <path fill="#fff5df" d="M0 0 C2-14 23-25 38-15 C52-49 96-48 112-17 C130-26 150-15 153 0 Z"/>
+  </svg>
+  <svg id="castle" x="800" y="190" width="124" height="120" viewBox="-61 -106 124 120" overflow="hidden">
+    <use href="#castle-art"/>
+  </svg>
+  <svg id="cannonball" x="232" y="310" width="124" height="124" viewBox="-62 -59 124 124" overflow="hidden">
+    <circle fill="#371945" cx="0" cy="3" r="57"/>
+    <path fill="#4d3658" d="M-51-10 A55 55 0 0 1 52-15 A51 51 0 0 1 9 52 Q-43 52-51-10 Z"/>
+    <ellipse fill="#9c819d" cx="38" cy="-12" rx="8" ry="14" transform="rotate(-14.32394487827058 38 -12)"/>
+    <circle fill="#9c819d" cx="43" cy="8" r="4"/>
+  </svg>
+  <svg id="launch-pad" x="368" y="310" width="180" height="76" viewBox="10 424 180 76" overflow="hidden">
+    <path fill="#371945" d="M14 491 L31 464 L164 437 L186 496 H164 L150 468 L64 484 L52 496 H39 L47 482 L37 483 L29 491 Z"/>
+    <path fill="#ff625f" d="M26 463 L163 429 L171 437 L53 476 L27 470 Z M124 494 L152 471 L167 494 Z"/>
+    <path fill="#ffd51a" d="M55 469 L74 464 L61 489 Z M85 461 L103 456 L94 477 Z M112 454 L132 448 L125 466 Z M140 446 L158 441 L155 457 Z"/>
+  </svg>
+  <svg id="launch-burst" x="560" y="310" width="164" height="130" viewBox="24 319 164 130" overflow="hidden">
+    <path fill="#fff5df" d="M88 443 C72 444 67 433 75 423 C54 424 53 399 76 395 C68 369 96 361 110 379 C121 360 151 376 142 396 C165 405 149 432 128 427 C125 443 110 449 98 438 Z"/>
+    <path fill="#ffd51a" d="M72 376 L44 359 L57 349 Z M102 358 L88 332 L103 326 Z M62 401 L30 395 L37 383 Z M151 396 L180 382 L185 396 Z"/>
+    <circle fill="#fff5df" cx="145" cy="376" r="2.8"/>
+  </svg>
+  <svg id="wig-burst" x="736" y="314" width="112" height="112" viewBox="0 0 112 112" overflow="hidden">
+    <path fill="none" d="M15 73 Q17 42 35 34 M77 76 Q93 58 88 41" stroke="#eb3cad" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill="#ffd51a" d="M37 49 L57 13 L75 49 H64 V78 L50 71 V49 Z"/>
+    <circle fill="#fff5df" cx="30" cy="78" r="7"/>
+    <circle fill="#fff5df" cx="18" cy="87" r="4"/>
+    <circle fill="#fff5df" cx="84" cy="85" r="5"/>
+  </svg>
+  <svg id="trail-dot" x="860" y="310" width="16" height="16" viewBox="0 0 16 16" overflow="hidden">
+    <circle fill="#fff5df" cx="8" cy="8" r="7"/>
+  </svg>
+  <svg id="sparks" x="888" y="310" width="74" height="70" viewBox="0 0 74 70" overflow="hidden">
+    <path fill="#ffd51a" d="M34 36 L17 12 L30 7 Z M42 33 L48 10 L58 19 Z M45 43 L68 36 L70 47 Z M30 45 L9 53 L7 42 Z"/>
+    <circle fill="#fff5df" cx="37" cy="39" r="5"/>
+  </svg>
+  <svg id="reward-powder-charge" x="8" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#f3bc53" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#f3bc53" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <path fill="#f3bc53" d="M15 117 L61 112 L75 119 L71 149 L23 153 Z"/>
+    <path fill="#371945" d="M21 119 L64 115 L73 119 L70 124 L22 129 Z"/>
+    <path fill="#fff5df" d="M35 124 L43 123 L45 151 L37 152 Z" opacity=".36"/>
+    <g transform="translate(43 121) scale(.43)">
+    <path fill="#371945" d="M26 21 L46 20 L45 28 Q58 39 55 55 Q49 65 25 64 Q13 59 15 47 Q17 35 27 28 Z"/>
+    <path fill="#a86b52" d="M19 49 Q22 38 31 29 L41 29 Q48 36 50 49 L48 57 Q32 62 22 55 Z"/>
+    <path fill="none" d="M28 26 H46 M37 24 Q34 14 43 12" stroke="#ffd51a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#fff5df" cx="45" cy="11" r="3"/>
+    <path fill="#f5ae57" d="M34 37 L42 46 L35 54 L28 46 Z"/>
+    </g>
+  </svg>
+  <svg id="powder-charge" x="8" y="662" width="72" height="76" viewBox="0 0 72 76" overflow="hidden">
+    <path fill="#371945" d="M26 21 L46 20 L45 28 Q58 39 55 55 Q49 65 25 64 Q13 59 15 47 Q17 35 27 28 Z"/>
+    <path fill="#a86b52" d="M19 49 Q22 38 31 29 L41 29 Q48 36 50 49 L48 57 Q32 62 22 55 Z"/>
+    <path fill="none" d="M28 26 H46 M37 24 Q34 14 43 12" stroke="#ffd51a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#fff5df" cx="45" cy="11" r="3"/>
+    <path fill="#f5ae57" d="M34 37 L42 46 L35 54 L28 46 Z"/>
+  </svg>
+  <svg id="reward-dynamite" x="108" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#ff625f" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#ff625f" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <path fill="#ff625f" d="M15 117 L61 112 L75 119 L71 149 L23 153 Z"/>
+    <path fill="#371945" d="M21 119 L64 115 L73 119 L70 124 L22 129 Z"/>
+    <path fill="#fff5df" d="M35 124 L43 123 L45 151 L37 152 Z" opacity=".36"/>
+    <g transform="translate(43 121) scale(.43)">
+    <rect fill="#a43166" x="12" y="29" width="16" height="33" rx="5"/>
+    <rect fill="#ff625f" x="27" y="23" width="17" height="39" rx="5"/>
+    <rect fill="#e84964" x="43" y="28" width="15" height="33" rx="5"/>
+    <path fill="#371945" d="M10 43 H59 V52 H10 Z"/>
+    <path fill="none" d="M32 23 Q28 12 39 13 Q47 14 48 8" stroke="#ffd51a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#fff5df" cx="49" cy="7" r="3"/>
+    </g>
+  </svg>
+  <svg id="dynamite" x="94" y="662" width="72" height="76" viewBox="0 0 72 76" overflow="hidden">
+    <rect fill="#a43166" x="12" y="29" width="16" height="33" rx="5"/>
+    <rect fill="#ff625f" x="27" y="23" width="17" height="39" rx="5"/>
+    <rect fill="#e84964" x="43" y="28" width="15" height="33" rx="5"/>
+    <path fill="#371945" d="M10 43 H59 V52 H10 Z"/>
+    <path fill="none" d="M32 23 Q28 12 39 13 Q47 14 48 8" stroke="#ffd51a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#fff5df" cx="49" cy="7" r="3"/>
+  </svg>
+  <svg id="reward-powder-barrel" x="208" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#ffa32a" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#ffa32a" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <path fill="#ffa32a" d="M15 117 L61 112 L75 119 L71 149 L23 153 Z"/>
+    <path fill="#371945" d="M21 119 L64 115 L73 119 L70 124 L22 129 Z"/>
+    <path fill="#fff5df" d="M35 124 L43 123 L45 151 L37 152 Z" opacity=".36"/>
+    <g transform="translate(43 121) scale(.43)">
+    <path fill="#371945" d="M16 19 Q36 13 56 19 Q65 42 54 61 Q35 66 18 61 Q8 41 16 19 Z"/>
+    <path fill="#bd6747" d="M18 22 Q36 18 55 22 Q60 44 52 58 Q35 62 21 58 Q13 40 18 22 Z"/>
+    <path fill="none" d="M28 24 Q24 41 29 56 M44 24 Q49 42 43 55" stroke="#f5a459" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill="#371945" d="M14 29 Q35 36 59 29 L60 36 Q37 43 13 36 Z M14 47 Q35 54 58 47 L56 54 Q33 61 16 54 Z"/>
+    <ellipse fill="#f5b464" cx="36" cy="19" rx="19" ry="4"/>
+    <circle fill="#371945" cx="37" cy="42" r="3"/>
+    </g>
+  </svg>
+  <svg id="powder-barrel" x="180" y="662" width="72" height="76" viewBox="0 0 72 76" overflow="hidden">
+    <path fill="#371945" d="M16 19 Q36 13 56 19 Q65 42 54 61 Q35 66 18 61 Q8 41 16 19 Z"/>
+    <path fill="#bd6747" d="M18 22 Q36 18 55 22 Q60 44 52 58 Q35 62 21 58 Q13 40 18 22 Z"/>
+    <path fill="none" d="M28 24 Q24 41 29 56 M44 24 Q49 42 43 55" stroke="#f5a459" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill="#371945" d="M14 29 Q35 36 59 29 L60 36 Q37 43 13 36 Z M14 47 Q35 54 58 47 L56 54 Q33 61 16 54 Z"/>
+    <ellipse fill="#f5b464" cx="36" cy="19" rx="19" ry="4"/>
+    <circle fill="#371945" cx="37" cy="42" r="3"/>
+  </svg>
+  <svg id="reward-heavy-charge" x="308" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#079eeb" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#079eeb" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <path fill="#079eeb" d="M15 117 L61 112 L75 119 L71 149 L23 153 Z"/>
+    <path fill="#371945" d="M21 119 L64 115 L73 119 L70 124 L22 129 Z"/>
+    <path fill="#fff5df" d="M35 124 L43 123 L45 151 L37 152 Z" opacity=".36"/>
+    <g transform="translate(43 121) scale(.43)">
+    <path fill="#371945" d="M10 34 L22 21 H46 L61 34 V57 H10 Z"/>
+    <path fill="#39c1f3" d="M18 32 L25 25 H44 L54 33 L42 40 H25 Z"/>
+    <path fill="#176cb5" d="M13 39 H28 V54 H13 Z M44 41 L58 35 V54 H44 Z"/>
+    <circle fill="#ffd51a" cx="37" cy="47" r="6"/>
+    <path fill="none" d="M29 23 Q30 14 41 13 L46 8" stroke="#ff625f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#fff5df" cx="47" cy="8" r="3"/>
+    </g>
+  </svg>
+  <svg id="heavy-charge" x="266" y="662" width="72" height="76" viewBox="0 0 72 76" overflow="hidden">
+    <path fill="#371945" d="M10 34 L22 21 H46 L61 34 V57 H10 Z"/>
+    <path fill="#39c1f3" d="M18 32 L25 25 H44 L54 33 L42 40 H25 Z"/>
+    <path fill="#176cb5" d="M13 39 H28 V54 H13 Z M44 41 L58 35 V54 H44 Z"/>
+    <circle fill="#ffd51a" cx="37" cy="47" r="6"/>
+    <path fill="none" d="M29 23 Q30 14 41 13 L46 8" stroke="#ff625f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle fill="#fff5df" cx="47" cy="8" r="3"/>
+  </svg>
+  <svg id="reward-royal-bomb" x="408" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#80187e" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#80187e" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <path fill="#80187e" d="M15 117 L61 112 L75 119 L71 149 L23 153 Z"/>
+    <path fill="#371945" d="M21 119 L64 115 L73 119 L70 124 L22 129 Z"/>
+    <path fill="#fff5df" d="M35 124 L43 123 L45 151 L37 152 Z" opacity=".36"/>
+    <g transform="translate(43 121) scale(.43)">
+    <circle fill="#371945" cx="35" cy="43" r="21"/>
+    <circle fill="#6c2c91" cx="33" cy="40" r="17"/>
+    <ellipse fill="#a85cbe" cx="25" cy="35" rx="5" ry="8"/>
+    <path fill="#ffd51a" d="M22 24 L19 12 L29 17 L35 8 L42 17 L52 12 L48 24 Z"/>
+    <circle fill="#ff625f" cx="35" cy="21" r="3"/>
+    <path fill="#fff5df" d="M37 33 L40 40 L47 41 L41 45 L43 52 L37 48 L31 52 L33 45 L27 41 L34 40 Z"/>
+    </g>
+  </svg>
+  <svg id="royal-bomb" x="352" y="662" width="72" height="76" viewBox="0 0 72 76" overflow="hidden">
+    <circle fill="#371945" cx="35" cy="43" r="21"/>
+    <circle fill="#6c2c91" cx="33" cy="40" r="17"/>
+    <ellipse fill="#a85cbe" cx="25" cy="35" rx="5" ry="8"/>
+    <path fill="#ffd51a" d="M22 24 L19 12 L29 17 L35 8 L42 17 L52 12 L48 24 Z"/>
+    <circle fill="#ff625f" cx="35" cy="21" r="3"/>
+    <path fill="#fff5df" d="M37 33 L40 40 L47 41 L41 45 L43 52 L37 48 L31 52 L33 45 L27 41 L34 40 Z"/>
+  </svg>
+  <svg id="reward-wig" x="508" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#2fa779" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#2fa779" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <path fill="#2fa779" d="M15 117 L61 112 L75 119 L71 149 L23 153 Z"/>
+    <path fill="#371945" d="M21 119 L64 115 L73 119 L70 124 L22 129 Z"/>
+    <path fill="#fff5df" d="M35 124 L43 123 L45 151 L37 152 Z" opacity=".36"/>
+    <g transform="translate(43 121) scale(.43)">
+    <path fill="#e4b77d" d="M15 46 Q9 25 25 18 Q37 11 53 22 Q63 31 57 45 L53 56 L44 53 L37 62 L28 56 L17 58 Z"/>
+    <path fill="#fff5df" d="M17 40 Q12 24 25 20 Q34 16 41 23 Q56 20 58 33 L55 43 Q51 36 43 42 Q40 33 31 38 Q27 32 22 41 Z"/>
+    <circle fill="#fff5df" cx="22" cy="45" r="8"/>
+    <circle fill="#fff5df" cx="35" cy="50" r="8"/>
+    <circle fill="#fff5df" cx="49" cy="46" r="8"/>
+    <path fill="none" d="M22 43 Q27 48 22 49 M35 48 Q40 53 35 54 M49 43 Q54 48 49 50" stroke="#d8a574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </svg>
+  <svg id="wig" x="438" y="662" width="72" height="76" viewBox="0 0 72 76" overflow="hidden">
+    <path fill="#e4b77d" d="M15 46 Q9 25 25 18 Q37 11 53 22 Q63 31 57 45 L53 56 L44 53 L37 62 L28 56 L17 58 Z"/>
+    <path fill="#fff5df" d="M17 40 Q12 24 25 20 Q34 16 41 23 Q56 20 58 33 L55 43 Q51 36 43 42 Q40 33 31 38 Q27 32 22 41 Z"/>
+    <circle fill="#fff5df" cx="22" cy="45" r="8"/>
+    <circle fill="#fff5df" cx="35" cy="50" r="8"/>
+    <circle fill="#fff5df" cx="49" cy="46" r="8"/>
+    <path fill="none" d="M22 43 Q27 48 22 49 M35 48 Q40 53 35 54 M49 43 Q54 48 49 50" stroke="#d8a574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="reward-mortar-blueprint" x="608" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#3177df" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#3177df" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <g transform="translate(5 88)">
+    <path fill="#76c8f9" d="M12 19 L50 14 L62 25 L58 54 L19 58 L11 50 Z"/>
+    <path fill="#c2edff" d="M13 19 Q18 16 23 19 L25 48 Q17 48 12 52 Z M50 14 Q60 11 63 19 L61 29 L54 27 Z"/>
+    <path fill="none" d="M31 44 H49 M34 42 L36 27 H47 L45 42 M33 27 H50" stroke="#2473c6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </svg>
+  <svg id="reward-cannon-blueprint" x="708" y="486" width="90" height="164" viewBox="0 0 90 164" overflow="hidden">
+    <path fill="#371945" d="M23 58 L25 59 L44 112 L64 58 L67 59 L48 119 H42 Z"/>
+    <path fill="#3177df" d="M42 71 H48 L52 84 H38 Z"/>
+    <ellipse fill="#3177df" cx="45" cy="43" rx="35" ry="36"/>
+    <ellipse fill="#fff5df" opacity=".52" cx="33" cy="30" rx="7" ry="12" transform="rotate(35 33 30)"/>
+    <g transform="translate(5 88)">
+    <path fill="#76c8f9" d="M12 19 L50 14 L62 25 L58 54 L19 58 L11 50 Z"/>
+    <path fill="#c2edff" d="M13 19 Q18 16 23 19 L25 48 Q17 48 12 52 Z M50 14 Q60 11 63 19 L61 29 L54 27 Z"/>
+    <path fill="none" d="M29 43 H49 M35 41 L31 35 L47 25 L51 31 L38 40" stroke="#2473c6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </svg>
+  <svg id="mortar-blueprint" x="810" y="488" width="72" height="72" viewBox="0 0 72 72" overflow="hidden">
+    <path fill="#76c8f9" d="M12 19 L50 14 L62 25 L58 54 L19 58 L11 50 Z"/>
+    <path fill="#c2edff" d="M13 19 Q18 16 23 19 L25 48 Q17 48 12 52 Z M50 14 Q60 11 63 19 L61 29 L54 27 Z"/>
+    <path fill="none" d="M31 44 H49 M34 42 L36 27 H47 L45 42 M33 27 H50" stroke="#2473c6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="cannon-blueprint" x="908" y="488" width="72" height="72" viewBox="0 0 72 72" overflow="hidden">
+    <path fill="#76c8f9" d="M12 19 L50 14 L62 25 L58 54 L19 58 L11 50 Z"/>
+    <path fill="#c2edff" d="M13 19 Q18 16 23 19 L25 48 Q17 48 12 52 Z M50 14 Q60 11 63 19 L61 29 L54 27 Z"/>
+    <path fill="none" d="M29 43 H49 M35 41 L31 35 L47 25 L51 31 L38 40" stroke="#2473c6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg id="mortar" x="524" y="662" width="108" height="96" viewBox="0 0 108 96" overflow="hidden">
+    <path fill="#371945" d="M18 73 H91 L101 86 H11 Z M27 25 H82 L72 70 H38 Z"/>
+    <path fill="#855793" d="M35 28 H73 L65 63 H43 Z"/>
+    <path fill="#80187e" d="M31 64 H77 L84 74 H25 Z"/>
+    <rect fill="#60406c" x="24" y="18" width="61" height="13" rx="4"/>
+    <rect fill="#ffd51a" x="33" y="25" width="44" height="6" rx="3"/>
+    <path fill="#ff625f" d="M19 76 H90 L94 83 H15 Z"/>
+  </svg>
+  <svg id="cannon" x="644" y="662" width="128" height="96" viewBox="0 0 128 96" overflow="hidden">
+    <path fill="#371945" d="M23 65 L40 77 L62 60 L113 23 L100 10 L42 46 Z"/>
+    <path fill="#67467c" d="M30 63 L41 69 L105 23 L99 16 L44 52 Z"/>
+    <path fill="#ffd51a" d="M97 12 L105 7 L119 26 L111 31 Z"/>
+    <path fill="#ff625f" d="M21 69 H81 L94 85 H14 Z"/>
+    <circle fill="#371945" cx="52" cy="75" r="16"/>
+    <circle fill="#e6a74e" cx="52" cy="75" r="10"/>
+    <circle fill="#371945" cx="52" cy="75" r="4"/>
+  </svg>
+  <svg id="aim-arrow" x="786" y="662" width="96" height="56" viewBox="0 0 96 56" overflow="hidden">
+    <path fill="#371945" d="M8 23 H58 V11 L88 28 L58 45 V33 H8 Z"/>
+    <path fill="#ffd51a" d="M13 25 H63 V20 L78 28 L63 36 V31 H13 Z"/>
+  </svg>
+  <svg id="start-zone" x="896" y="662" width="120" height="74" viewBox="0 0 120 74" overflow="hidden">
+    <rect fill="#fff5df" fill-opacity=".24" stroke="#fff5df" stroke-width="3" stroke-dasharray="6 5" x="4" y="4" width="112" height="66" rx="8"/>
+  </svg>
+  <svg id="horse-front" x="8" y="776" width="118" height="106" viewBox="0 0 118 106" overflow="hidden">
+    <path fill="#58304b" d="M21 38 Q26 19 48 22 L54 7 L66 17 L74 10 L79 26 Q87 31 94 48 L103 55 L100 68 L79 70 L67 60 L63 81 H23 Z"/>
+    <path fill="#b66d58" d="M22 43 Q32 29 48 31 L55 21 L57 13 L66 25 L73 17 L74 29 Q84 33 90 49 L99 55 L95 64 L78 66 L66 56 L59 79 H23 Z"/>
+    <path fill="#f1b586" d="M81 51 L98 55 L95 65 L79 66 L73 59 Z"/>
+    <circle fill="#371945" cx="73" cy="41" r="3.5"/>
+    <path fill="#b66d58" d="M35 73 L53 71 L52 88 L62 96 L54 101 L43 96 L39 83 L31 98 H20 L24 90 Z"/>
+    <path fill="#371945" d="M19 96 H32 L30 102 H17 Z M53 97 L60 93 L65 98 L58 102 Z"/>
+    <path fill="#d1906b" d="M23 45 Q11 48 11 61 Q12 73 23 78 L29 71 V48 Z"/>
+  </svg>
+  <svg id="horse-rear" x="138" y="776" width="118" height="106" viewBox="0 0 118 106" overflow="hidden">
+    <path fill="#58304b" d="M37 42 Q16 34 11 58 Q10 72 2 78 Q25 82 31 59 L43 55 Z"/>
+    <path fill="#b66d58" d="M34 37 Q58 27 88 40 L98 47 V72 L83 78 L66 75 L61 86 L66 96 L55 101 L49 89 L53 74 L43 77 L42 95 L31 101 L28 94 L30 67 Q25 49 34 37 Z"/>
+    <path fill="#d1906b" d="M87 40 Q103 42 105 55 Q106 68 96 73 L88 76 Z"/>
+    <path fill="#371945" d="M28 94 L42 94 L38 102 H25 Z M54 96 L66 93 L70 100 L58 103 Z"/>
+  </svg>
+  <svg id="deer" x="268" y="776" width="142" height="106" viewBox="0 0 142 106" overflow="hidden">
+    <path fill="#985037" d="M26 48 Q54 37 87 45 L101 32 L97 24 L102 15 L112 25 L121 20 L124 34 L135 39 L134 49 L113 52 L103 66 L96 75 L90 98 H83 L82 78 L70 67 L49 69 L43 85 L34 96 L27 92 L36 76 L31 64 L20 60 L9 46 Z"/>
+    <path fill="#d98a56" d="M25 48 Q51 42 85 48 L104 36 L108 28 L114 32 L123 33 L134 40 L132 47 L112 48 L101 58 Q88 64 72 62 L44 66 L31 60 Z"/>
+    <path fill="#fff5df" d="M28 49 Q49 47 66 51 L56 59 L33 58 Z M121 43 L135 40 L132 48 L122 49 Z"/>
+    <circle fill="#371945" cx="121" cy="37" r="2.8"/>
+    <path fill="none" d="M112 29 L108 17 L113 8 M108 17 L101 12 M120 28 L123 17 L132 8 M123 17 L120 9" stroke="#371945" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill="#3d9d61" d="M112 11 Q104 3 112 2 Q116-2 119 4 Q126 2 125 9 L119 13 Z"/>
+    <circle fill="#ff625f" cx="114" cy="6" r="2"/>
+    <circle fill="#ff625f" cx="121" cy="8" r="2"/>
+  </svg>
+  <svg id="landing-dust" x="422" y="780" width="132" height="72" viewBox="0 0 132 72" overflow="hidden">
+    <path fill="#fff5df" d="M11 58 Q9 49 24 47 Q24 32 40 36 Q44 21 60 33 Q69 21 84 31 Q100 29 104 42 Q119 42 124 57 Z"/>
+    <path fill="#ffe2a5" d="M31 57 Q41 46 53 50 Q65 38 77 49 Q87 42 100 57 Z"/>
+    <circle fill="#fff5df" cx="32" cy="26" r="4"/>
+    <circle fill="#fff5df" cx="97" cy="20" r="5"/>
+  </svg>
+  <svg id="reward-pop" x="566" y="778" width="84" height="84" viewBox="0 0 84 84" overflow="hidden">
+    <path fill="#ffd51a" d="M42 8 L49 31 L73 29 L54 44 L63 67 L42 53 L22 67 L30 44 L11 29 L35 31 Z"/>
+    <path fill="#eb3cad" d="M5 48 L15 45 L14 53 Z M69 16 L74 8 L79 15 Z M62 68 L76 67 L71 75 Z"/>
+    <circle fill="#fff5df" cx="40" cy="40" r="5"/>
+  </svg>
+  <svg id="hare-body" x="666" y="776" width="148" height="102" viewBox="0 0 148 102" overflow="hidden">
+    <path fill="#fff5df" d="M23 46 Q13 35 4 41 L8 49 Q3 50 5 54 Q9 62 26 57 Z"/>
+    <path fill="#b35d48" d="M99 44 Q89 27 93 5 Q97 1 104 10 Q112 21 110 42 Z"/>
+    <path fill="#ed8d84" d="M101 34 Q96 21 97 10 Q106 18 106 34 Z"/>
+    <path fill="#d48359" d="M107 42 Q106 25 117 8 Q123 5 124 15 Q123 29 117 44 Z"/>
+    <path fill="#f6aa98" d="M111 30 Q114 18 121 12 Q121 21 116 31 Z"/>
+    <path fill="#ae5947" d="M17 57 Q17 43 34 37 Q49 29 71 36 Q87 42 95 33 Q104 26 119 34 Q127 38 132 48 L142 51 Q146 56 140 62 Q132 69 113 69 Q103 67 98 64 Q94 74 70 76 Q52 79 29 71 Q20 68 17 57 Z"/>
+    <path fill="#d48359" d="M19 56 Q20 43 34 39 Q51 32 72 39 Q87 45 98 34 Q108 30 119 36 Q129 40 132 51 L140 54 Q140 63 126 66 Q110 67 99 62 Q92 72 70 73 Q54 77 30 68 Q22 66 19 56 Z"/>
+    <path fill="#f4c58c" d="M32 62 Q51 67 72 62 Q88 58 95 52 Q103 51 109 57 Q121 54 133 52 L142 54 Q140 62 132 65 Q115 70 100 63 Q95 70 78 72 Q53 79 32 68 Z"/>
+    <path fill="#be6e52" d="M27 59 Q27 43 44 43 Q54 43 62 52 Q44 47 43 64 Z"/>
+    <ellipse fill="#fff5df" cx="115" cy="45" rx="6" ry="7"/>
+    <circle fill="#371945" cx="117" cy="46" r="3.1"/>
+    <path fill="#7b4249" d="M139 50 Q145 50 146 53 Q145 57 141 57 Q137 55 139 50 Z"/>
+    <path d="M130 60 Q136 64 140 58" fill="none" stroke="#7b4249" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+  <svg id="hare-front-paw" x="826" y="776" width="24" height="39" viewBox="0 0 24 39" overflow="hidden">
+    <path fill="#a45248" d="M4 3 Q11 0 14 5 Q17 11 12 20 L13 27 Q20 27 22 32 Q22 36 16 36 H8 Q4 34 5 29 L6 20 Q2 11 4 3 Z"/>
+    <path fill="#f4c58c" d="M10 30 Q18 28 21 32 Q21 35 15 35 H9 Z"/>
+  </svg>
+  <svg id="hare-hind-paw" x="864" y="776" width="35" height="43" viewBox="0 0 35 43" overflow="hidden">
+    <path fill="#bd6950" d="M3 5 Q12 0 17 6 Q22 14 13 23 L12 30 Q21 27 29 32 Q34 35 30 39 Q26 42 20 40 L9 38 Q3 37 4 31 L5 24 Q1 17 3 5 Z"/>
+    <path fill="#f4c58c" d="M17 34 Q24 30 30 35 Q31 39 25 39 L17 37 Z"/>
+  </svg>
+  <svg id="windmill" x="934" y="190" width="82" height="112" viewBox="0 0 82 112" overflow="hidden">
+    <path fill="#c69166" d="M22 29 H61 L70 111 H13 Z"/>
+    <path fill="#ffe0a4" d="M24 30 H53 L60 110 H14 Z"/>
+    <path fill="#f6bb7e" d="M20 95 H65 L68 109 H16 Z M21 86 H38 V89 H20 Z M43 61 H64 L64 64 H43 Z"/>
+    <path fill="#63436b" d="M12 33 L41 4 L70 29 L67 35 H14 Z"/>
+    <path fill="#dd795d" d="M16 31 L41 5 L61 31 Z"/>
+    <path fill="#7b5267" d="M31 110 V91 Q42 78 50 91 V110 Z"/>
+    <path fill="#a76753" d="M36 110 V93 Q42 85 46 93 V110 Z"/>
+    <path fill="#7b5267" d="M49 57 A5 5 0 0 1 59 57 V68 H49 Z"/>
+    <path stroke="#e5ab73" stroke-width="2" d="M54 54 V68 M49 61 H59"/>
+    <path fill="#7c5a69" d="M11 110 H72 V112 H11 Z"/>
+  </svg>
+  <svg id="windmill-sails" x="902" y="382" width="104" height="104" viewBox="0 0 104 104" overflow="hidden">
+    <defs>
+      <g id="mill-sail">
+        <path fill="#884f50" d="M48 55 L49 6 H53 L55 55 Z"/>
+        <path fill="#eec18a" d="M52 6 L66 10 L63 41 L52 43 Z"/>
+        <path fill="#fff5df" d="M54 9 L63 12 L60 37 L54 39 Z"/>
+        <path stroke="#c99475" stroke-width="1.25" d="M58 11 L57 39 M53 19 L64 21 M53 28 L63 30"/>
+      </g>
+    </defs>
+    <use href="#mill-sail"/>
+    <use href="#mill-sail" transform="rotate(90 52 52)"/>
+    <use href="#mill-sail" transform="rotate(180 52 52)"/>
+    <use href="#mill-sail" transform="rotate(270 52 52)"/>
+    <circle fill="#824c55" cx="52" cy="52" r="7"/>
+    <circle fill="#ffd688" cx="52" cy="52" r="4"/>
+  </svg>
+  <svg id="belfry" x="368" y="390" width="78" height="92" viewBox="0 0 78 92" overflow="hidden">
+    <path fill="#c29277" d="M24 29 H56 V90 H21 Z"/>
+    <path fill="#fee5b8" d="M24 29 H49 V90 H21 Z"/>
+    <path fill="#ddaa81" d="M20 59 H58 V63 H20 Z M21 82 H56 V85 H21 Z"/>
+    <path fill="#4e365c" d="M16 31 L39 7 L62 31 Z"/>
+    <path fill="#8a5a85" d="M17 30 L39 8 L49 30 Z"/>
+    <path stroke="#77515e" stroke-width="2.4" stroke-linecap="round" d="M39 12 V3 M35 6 H43"/>
+    <path fill="#634364" d="M30 55 V43 A9 9 0 0 1 48 43 V55 Z"/>
+    <path fill="#ffce66" d="M35 50 L37 43 Q39 40 42 43 L44 50 L46 52 H33 Z"/>
+    <circle fill="#d68a4b" cx="40" cy="53" r="1.5"/>
+    <path fill="#a2695c" d="M35 89 V76 A4 4 0 0 1 43 76 V89 Z"/>
+    <path fill="#a36e65" d="M17 88 H60 V92 H17 Z"/>
+  </svg>
+  <svg id="belfry-horse" x="460" y="396" width="84" height="80" viewBox="0 0 84 80" overflow="hidden">
+    <path d="M6 4 Q20 8 28 21 Q32 27 39 30" fill="none" stroke="#814c57" stroke-width="2.1" stroke-linecap="round"/>
+    <path fill="#674053" d="M57 57 Q75 61 76 74 Q66 71 59 67 L54 62 Z"/>
+    <path fill="#995649" d="M25 46 L33 33 L30 24 L36 23 L38 17 L44 26 L50 25 L56 34 L51 42 Q62 46 61 60 L51 66 H39 L28 56 Z"/>
+    <path fill="#be795f" d="M28 46 L37 34 L35 27 L41 27 L40 20 L46 28 L51 29 L55 35 L50 40 Q63 48 59 60 Q53 66 43 62 L32 54 Z"/>
+    <path fill="#e6a781" d="M45 32 Q55 29 57 34 Q58 39 51 40 L46 37 Z"/>
+    <path d="M37 30 L50 37" fill="none" stroke="#5f3a52" stroke-width="1.8"/>
+    <circle fill="#371945" cx="46" cy="31.5" r="1.55"/>
+    <path fill="#995649" d="M56 55 L63 62 L67 69 L63 72 L58 67 L55 61 L51 58 Z"/>
+    <path fill="#a76554" d="M31 49 L22 58 L27 67 L23 70 L16 58 L26 45 Z M36 55 L32 65 L40 74 L37 77 L27 67 L29 53 Z M50 58 L50 68 L59 73 L55 77 L45 71 L43 62 Z"/>
+    <path fill="#654051" d="M21 68 L27 65 L30 69 L25 72 Z M35 76 L40 72 L43 75 L39 79 Z M53 76 L58 71 L62 74 L58 79 Z"/>
+  </svg>
+  <svg id="moon-coat" x="904" y="776" width="106" height="102" viewBox="0 0 106 102" overflow="hidden">
+    <path fill="#722963" d="M42 21 Q29 18 22 29 L10 53 L3 56 L12 65 L24 62 L35 46 L31 79 L19 91 L39 89 L51 98 L63 90 L83 94 L73 79 L70 46 L81 60 L99 55 L95 45 L88 48 L79 32 Q72 18 63 21 Z"/>
+    <path fill="#b2487a" d="M43 21 L50 31 L53 84 L48 91 L39 84 L28 89 L36 77 L40 45 L26 27 Q33 19 43 21 Z"/>
+    <path fill="#993363" d="M61 22 Q70 19 78 30 L68 37 L67 76 L75 87 L60 84 L55 91 L54 37 Z"/>
+    <path fill="#fff3d5" d="M34 21 L38 14 L46 16 L50 12 L55 15 L61 12 L69 18 L72 27 L62 40 L54 33 L48 39 L36 28 Z"/>
+    <path fill="#6f3a67" d="M43 22 Q53 15 65 21 L59 29 L54 33 L48 28 Z"/>
+    <path fill="#ffe9ba" d="M3 56 L10 52 L17 58 L17 64 L11 67 L5 63 Z M94 44 L101 47 L102 53 L97 58 L92 53 Z"/>
+    <circle fill="#ffd271" cx="58" cy="48" r="2.6"/>
+    <circle fill="#ffd271" cx="59" cy="60" r="2.6"/>
+    <circle fill="#ffd271" cx="60" cy="72" r="2.6"/>
+    <path d="M26 22 L22 13 M79 22 L85 15" stroke="#f5aa7b" stroke-width="2.8" stroke-linecap="round"/>
+  </svg>
+  <svg id="moon-dog" x="810" y="566" width="108" height="76" viewBox="0 0 108 76" overflow="hidden">
+    <path fill="#573c5d" d="M24 40 Q12 43 6 30 Q4 25 9 23 Q14 35 27 34 Z"/>
+    <path fill="#6e506b" d="M19 43 Q21 31 39 34 L60 36 L71 28 L79 23 Q88 23 93 30 L103 35 Q107 39 101 45 L86 49 L79 58 L57 58 L50 52 Q36 60 25 54 Z"/>
+    <path fill="#c28c73" d="M76 39 Q84 34 92 35 L102 35 Q106 40 101 45 L87 48 L84 54 L75 53 Z"/>
+    <path fill="#f5d5a7" d="M78 48 L85 47 L81 55 L77 58 L71 54 Z"/>
+    <path fill="#573c5d" d="M79 27 Q73 14 64 18 Q59 23 67 42 Q74 42 78 35 Z"/>
+    <path fill="#432f50" d="M99 34 Q106 34 106 38 Q105 41 101 41 Z"/>
+    <path fill="#f18d82" d="M95 46 Q98 44 100 46 L96 52 Q93 52 93 48 Z"/>
+    <circle fill="#fff5df" cx="88" cy="32" r="3.4"/>
+    <circle fill="#371945" cx="89" cy="32" r="1.9"/>
+    <path fill="#ea7370" d="M70 39 L75 39 L77 57 L72 57 Z"/>
+    <circle fill="#ffd36b" cx="76" cy="56" r="2.2"/>
+  </svg>
+  <svg id="dog-legs-extended" x="688" y="446" width="84" height="28" viewBox="0 0 84 28" overflow="hidden">
+    <path fill="#533a58" d="M19 5 L12 18 L2 22 L3 26 H11 L25 18 L27 5 Z M55 4 L65 20 L73 22 L76 26 H70 L60 24 L50 7 Z"/>
+    <path fill="#7b5870" d="M25 3 L27 13 L21 24 L25 26 L34 15 L34 5 Z M59 3 L71 16 L80 16 L83 20 L77 22 L68 21 L54 7 Z"/>
+  </svg>
+  <svg id="dog-legs-tucked" x="780" y="446" width="84" height="28" viewBox="0 0 84 28" overflow="hidden">
+    <path fill="#533a58" d="M20 4 L17 13 L28 22 L22 24 L12 15 L14 4 Z M55 3 L52 17 L59 22 L64 21 L58 14 L63 5 Z"/>
+    <path fill="#7b5870" d="M25 4 L29 12 L38 15 L39 19 L33 20 L23 16 L20 6 Z M57 4 L60 11 L49 19 L50 23 L56 23 L68 15 L65 4 Z"/>
+  </svg>
+  <svg id="moon-axe" x="928" y="566" width="78" height="80" viewBox="0 0 78 80" overflow="hidden">
+    <path d="M38 61 Q46 34 45 8 Q50 3 57 7 Q56 34 47 63 Z" fill="#956057" stroke="#684357" stroke-width="2"/>
+    <path d="M50 11 Q51 33 42 59" fill="none" stroke="#f1b477" stroke-width="2.5" stroke-linecap="round"/>
+    <path fill="#657a94" d="M36 46 L53 48 L49 62 L42 63 Q35 68 31 78 Q21 79 14 73 Q9 63 12 52 Q24 55 36 46 Z"/>
+    <path fill="#c1dbed" d="M14 54 Q24 56 35 51 L39 60 Q33 65 29 75 Q21 75 16 71 Q12 62 14 54 Z"/>
+    <path d="M13 54 Q11 65 16 73 Q21 77 29 76" fill="none" stroke="#fff5df" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+  <svg id="pasture-pond" x="632" y="244" width="116" height="34" viewBox="0 0 116 34" overflow="hidden">
+    <path fill="#286e60" d="M3 21 Q2 11 23 10 Q34 5 54 9 Q71 6 84 11 Q107 11 113 21 Q110 30 83 32 L32 32 Q8 30 3 21 Z"/>
+    <path fill="#38a7c1" d="M8 20 Q11 14 28 13 Q47 8 62 12 Q85 10 101 16 Q110 20 106 24 Q97 29 77 29 H36 Q13 28 8 20 Z"/>
+    <path fill="#71d6e5" d="M10 20 Q30 14 50 17 Q62 19 80 16 Q91 15 103 20 Q95 25 77 26 H40 Q20 26 10 20 Z"/>
+    <path fill="#e6fbff" d="M33 17 Q42 16 49 17 Q44 20 34 19 Z M60 24 Q68 22 77 22 Q74 25 63 26 Z"/>
+    <path d="M14 17 L12 7 M15 17 L19 10 M96 17 L101 7 M98 18 L105 13" fill="none" stroke="#43845e" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <svg id="horse-front-drinking" x="8" y="894" width="118" height="106" viewBox="0 0 118 106" overflow="hidden">
+    <path fill="#6d4351" d="M51 75 L59 75 L64 90 L59 102 H51 L55 91 Z M37 81 L46 80 L42 94 L32 103 H24 L33 94 Z"/>
+    <path fill="#58304b" d="M22 39 Q48 31 66 42 Q77 48 83 62 L93 73 L98 74 L98 83 L86 88 L69 74 L54 67 L43 79 H22 Z"/>
+    <path fill="#b66d58" d="M22 45 Q48 37 66 48 Q76 55 82 68 L91 79 L98 78 L99 86 L87 91 L69 78 L58 69 L48 78 H22 Z"/>
+    <path fill="#d1906b" d="M24 45 Q13 47 12 60 Q12 72 24 78 L30 71 V49 Z"/>
+    <path fill="#a56259" d="M23 50 Q17 53 17 61 Q17 68 23 71 L26 66 V54 Z"/>
+    <path fill="#58304b" d="M86 77 L88 65 L94 73 L99 69 L102 78 L104 85 L111 92 L110 100 L102 103 L91 96 L86 87 Z"/>
+    <path fill="#b66d58" d="M89 79 L90 72 L95 78 L99 75 L101 80 L101 86 L109 94 L108 99 L102 101 L93 95 L88 87 Z"/>
+    <path fill="#f1b586" d="M101 92 L110 94 L108 100 L102 101 L97 97 Z"/>
+    <circle fill="#371945" cx="97" cy="85" r="2.1"/>
+    <path fill="#b66d58" d="M42 72 L52 76 L49 89 L43 99 H32 L38 92 Z"/>
+    <path fill="#371945" d="M31 98 H44 L41 104 H29 Z M52 99 H60 L59 104 H49 Z"/>
+  </svg>
+  <svg id="hare-bush" x="138" y="894" width="156" height="104" viewBox="0 0 156 104" overflow="hidden">
+    <ellipse cx="78" cy="94" rx="75" ry="8" fill="#228761"/>
+    <path fill="#295855" d="M8 94 Q2 77 19 68 Q13 53 27 44 Q23 27 40 21 Q50 10 67 20 Q77 5 94 11 Q107 14 113 27 Q132 23 139 39 Q148 48 142 63 Q155 75 148 92 Q124 101 77 100 Q32 102 8 94 Z"/>
+    <path fill="#367761" d="M19 78 Q12 70 26 61 Q20 45 34 42 Q31 27 44 23 Q58 17 69 28 Q74 12 91 15 Q104 16 109 31 Q125 28 134 41 Q140 49 133 58 Q151 73 141 83 Q121 89 105 80 Q83 94 65 83 Q46 91 35 81 Q26 84 19 78 Z"/>
+    <path fill="#54a575" d="M34 49 Q40 34 51 35 Q59 36 62 43 Q48 39 34 49 Z M76 34 Q82 20 94 24 Q100 26 102 32 Q87 27 76 34 Z M107 59 Q112 45 123 48 Q130 51 130 56 Q118 52 107 59 Z M49 70 Q55 58 65 60 Q71 62 73 68 Q62 62 49 70 Z"/>
+  </svg>
+  <svg id="cloud-puff-small" x="306" y="894" width="44" height="36" viewBox="0 0 44 36" overflow="hidden">
+    <path fill="#fff5df" d="M5 20 C4 14 8 10 14 10 C17 4 25 3 30 7 C34 8 36 11 36 15 C41 16 43 22 40 26 C38 31 31 33 24 31 C18 34 11 31 8 27 C6 26 5 23 5 20 Z"/>
+    <path fill="#f4e6cd" d="M6 23 C10 26 15 26 19 24 C24 28 34 28 40 24 C39 30 31 33 24 31 C18 34 11 31 8 27 C7 26 6 25 6 23 Z"/>
+  </svg>
+  <svg id="cloud-puff-medium" x="362" y="894" width="50" height="42" viewBox="0 0 50 42" overflow="hidden">
+    <path fill="#fff5df" d="M5 25 C2 18 7 12 14 12 C16 6 22 3 28 5 C34 4 41 8 42 15 C47 17 50 23 46 29 C45 34 39 38 32 36 C27 40 18 40 13 34 C9 34 5 30 5 25 Z"/>
+    <path fill="#f4e6cd" d="M5 25 C9 29 16 30 20 28 C25 33 39 33 46 29 C45 34 39 38 32 36 C27 40 18 40 13 34 C9 34 5 30 5 25 Z"/>
+  </svg>
+  <svg id="cloud-puff-large" x="424" y="894" width="72" height="54" viewBox="0 0 72 54" overflow="hidden">
+    <path fill="#fff5df" d="M6 31 C3 23 9 16 17 16 C20 8 29 3 38 7 C47 3 56 8 59 17 C67 18 71 24 67 31 C70 38 63 44 55 45 C50 51 39 52 32 48 C23 52 14 47 11 42 C6 40 4 35 6 31 Z"/>
+    <path fill="#f4e6cd" d="M6 33 C12 38 20 39 26 36 C34 43 44 43 50 38 C57 40 63 37 67 32 C70 38 63 44 55 45 C50 51 39 52 32 48 C23 52 14 47 11 42 C7 40 5 37 6 33 Z"/>
+  </svg>
+</svg>
