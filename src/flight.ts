@@ -1,4 +1,4 @@
-import { ballRadius, chargeRadius, charges, cloudsIn, distance, duckAt, ducks, gravity, moon, radians, rewardAt, start, step } from './world';
+import { ballRadius, chargeRadius, charges, cloudsIn, distance, duckAt, duckRadius, ducksIn, gravity, launcherBoost, launcherDirection, launchers, launchPosition, moon, rewardAt, start, step, wigBoost } from './world';
 import type { Cloud, Point, Reward, RewardType, Setup } from './world';
 
 export const flightSpeed = 1.8;
@@ -33,27 +33,32 @@ export interface Flight {
 export type FlightEvent = { type: 'reward'; reward: Reward; point: Point } | { type: 'duck'; point: Point } | { type: 'wig'; point: Point };
 
 export function impulse(setup: Setup): Point {
-  const { baron, launcher, cannonAngle } = setup;
-  const aim = radians(cannonAngle);
-  const velocity = launcher === 'mortar' ? { x: 0, y: 205 }
-    : launcher === 'cannon' ? { x: Math.cos(aim) * 165, y: Math.sin(aim) * 165 }
-    : { x: 0, y: 0 };
+  const origin = launchPosition(setup);
+  const { launcher } = setup;
+  const velocity = { x: 0, y: 0 };
+  if (launcher !== 'none') {
+    const direction = launcherDirection(setup, launcher);
+    const { force } = launchers[launcher];
+    velocity.x = direction.x * force * (launcher === 'cannon' ? launcherBoost : 1);
+    velocity.y = direction.y * force * launcherBoost;
+  }
 
   for (const charge of setup.charges) {
-    const gap = distance(baron, charge);
+    const gap = distance(origin, charge);
     if (gap >= chargeRadius) continue;
     const strength = charges[charge.type].force * (1 - gap / chargeRadius);
     const divisor = Math.max(gap, 4);
-    velocity.x += (baron.x - charge.x) / divisor * strength;
-    velocity.y += (baron.y - charge.y) / divisor * strength;
+    velocity.x += (origin.x - charge.x) / divisor * strength;
+    velocity.y += (origin.y - charge.y) / divisor * strength;
   }
   return velocity;
 }
 
 export function beginFlight(setup: Setup, targetStartTime = 0): Flight {
+  const position = launchPosition(setup);
   return {
-    position: { ...setup.baron }, velocity: impulse(setup), tick: 0, targetStartTime, path: [{ ...setup.baron }],
-    height: setup.baron.y, range: Math.max(0, setup.baron.x - start.x), rewards: new Set(), ducks: new Map(),
+    position: { ...position }, velocity: impulse(setup), tick: 0, targetStartTime, path: [{ ...position }],
+    height: position.y, range: Math.max(0, position.x - start.x), rewards: new Set(), ducks: new Map(),
     clouds: new Map(), wigUsed: false, outcome: null,
   };
 }
@@ -128,7 +133,7 @@ export function advance(flight: Flight, availableRewards: ReadonlyMap<RewardType
   const events: FlightEvent[] = [];
   const from = flight.position;
   if (useWig && !flight.wigUsed) {
-    flight.velocity.y += 47;
+    flight.velocity.y += wigBoost;
     flight.wigUsed = true;
     events.push({ type: 'wig', point: from });
   }
@@ -160,20 +165,19 @@ export function advance(flight: Flight, availableRewards: ReadonlyMap<RewardType
     events.push({ type: 'reward', reward, point });
   }
 
-  ducks.forEach((duck, index) => {
-    if (flight.ducks.has(index)) return;
-    const radius = ballRadius + duck.radius;
-    const sweepX = duck.span + radius + Math.abs(to.x - from.x);
-    const sweepY = duck.lift + radius + Math.abs(to.y - from.y);
-    if (Math.abs(duck.x - from.x) > sweepX || Math.abs(duck.y - from.y) > sweepY) return;
-    const before = duckAt(index, targetTime);
-    const after = duckAt(index, nextTargetTime);
+  const radius = ballRadius + duckRadius;
+  const min = { x: Math.min(from.x, to.x) - radius, y: Math.min(from.y, to.y) - radius };
+  const max = { x: Math.max(from.x, to.x) + radius, y: Math.max(from.y, to.y) + radius };
+  for (const duck of ducksIn(min, max)) {
+    if (flight.ducks.has(duck.id)) continue;
+    const before = duckAt(duck, targetTime);
+    const after = duckAt(duck, nextTargetTime);
     const at = movingIntercept(from, to, before, after, radius);
-    if (at === null || at > until) return;
+    if (at === null || at > until) continue;
     const position = mix(before, after, at);
-    flight.ducks.set(index, { position, time: time + at * step, direction: after.x < before.x ? -1 : 1 });
+    flight.ducks.set(duck.id, { position, time: time + at * step, direction: after.x < before.x ? -1 : 1 });
     events.push({ type: 'duck', point: position });
-  });
+  }
 
   hitClouds(flight, from, to, time, until);
   flight.tick++;

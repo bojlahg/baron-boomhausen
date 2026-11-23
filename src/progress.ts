@@ -1,4 +1,4 @@
-import { canPlace, chargeLimit, chargeTypes, clamp, ducks, rewardFor, rewardRoutes } from './world';
+import { canPlace, chargeLimit, chargeTypes, clamp, duckCount, launchers, rewardFor, rewardRoutes } from './world';
 import type { Charge, ChargeType, Point, Reward, RewardType, Setup, Unlock } from './world';
 
 export interface Progress {
@@ -79,12 +79,19 @@ function readCharge(value: unknown): Charge | null {
 
 function readSetup(value: unknown, progress: Progress): Setup | null {
   if (!value || typeof value !== 'object') return null;
-  const { baron, charges, launcher, cannonAngle } = value as Partial<Record<keyof Setup, unknown>>;
-  if (!isPoint(baron) || !isAngle(cannonAngle, 30, 90) || !Array.isArray(charges)) return null;
+  const { baron, charges, launcher, cannonAngle, mortarTilt } = value as Partial<Record<keyof Setup, unknown>>;
+  if (!isPoint(baron) || !Array.isArray(charges)) return null;
   if (charges.length > chargeTypes.length * chargeLimit) return null;
   if (launcher !== 'none' && ((launcher !== 'mortar' && launcher !== 'cannon') || !progress.unlocked[launcher])) return null;
 
-  const setup: Setup = { baron, charges: [], launcher, cannonAngle };
+  // Validate the saved layout before mounting. Aim changes may put the muzzle over an existing charge.
+  const setup: Setup = {
+    baron, charges: [], launcher: 'none',
+    cannonAngle: typeof cannonAngle === 'number' && Number.isFinite(cannonAngle)
+      ? clamp(cannonAngle, launchers.cannon.minAngle, launchers.cannon.maxAngle) : launchers.cannon.defaultAngle,
+    mortarTilt: typeof mortarTilt === 'number' && Number.isFinite(mortarTilt)
+      ? clamp(mortarTilt, launchers.mortar.minAngle, launchers.mortar.maxAngle) : launchers.mortar.defaultAngle,
+  };
   if (!canPlace(setup, baron, 'baron')) return null;
   for (const item of charges) {
     const charge = readCharge(item);
@@ -92,6 +99,7 @@ function readSetup(value: unknown, progress: Progress): Setup | null {
     if (setup.charges.filter((item) => item.type === charge.type).length >= progress.counts[charge.type]) return null;
     setup.charges.push(charge);
   }
+  setup.launcher = launcher;
   return setup;
 }
 
@@ -107,7 +115,7 @@ export function loadProgress(key: string): Progress {
     for (const type of ['wig', 'mortar', 'cannon'] as const) progress.unlocked[type] = saved.unlocked?.[type] === true;
     progress.height = number(saved.height);
     progress.range = number(saved.range);
-    progress.duckRecord = clamp(Math.floor(number(saved.duckRecord)), 0, ducks.length);
+    progress.duckRecord = clamp(Math.floor(number(saved.duckRecord)), 0, duckCount);
     const hits = saved.moonHits;
     progress.moonHits = hits === 0 || hits === 1 || hits === 2 ? hits : saved.reachedMoon === true ? 1 : 0;
     if (isAngle(saved.moonCrackAngle, -Math.PI, Math.PI)) progress.moonCrackAngle = saved.moonCrackAngle;

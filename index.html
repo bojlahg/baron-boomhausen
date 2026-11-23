@@ -53,7 +53,8 @@
           <div id="inventory" class="inventory" aria-label="Charges placed out of total unlocked"></div>
           <div class="setup-tools">
             <label id="launcher-control" hidden>Launcher <select id="launcher" aria-label="Launcher"><option value="none">No launcher</option><option value="mortar" disabled>Mortar</option><option value="cannon" disabled>Cannon</option></select></label>
-            <label id="angle-control" hidden>Cannon Angle <input id="angle" type="range" min="30" max="90" value="60" /><output id="angle-value" for="angle">60°</output></label>
+            <label id="angle-control" hidden><span id="angle-label">Cannon Angle</span> <input id="angle" type="range" min="0" max="70" value="60" aria-labelledby="angle-label" /><output id="angle-value" for="angle">60°</output></label>
+            <button id="clear-charges" type="button" class="text-button" aria-label="Clear All Charges" hidden disabled>Clear All</button>
             <button id="remove-charge" type="button" class="text-button" hidden>Remove Charge</button>
           </div>
         </div>

@@ -10,7 +10,7 @@ import { horsePastureAt, horsePastures } from './return-ride';
 import type { HorseDeparture, RidePose } from './return-ride';
 import { drawSprite } from './sprites';
 import type { GameSprite } from './sprites';
-import { charges, clamp, cloudsIn, duckAt, ducks, map, moon, radians, rewardAt, start, zone } from './world';
+import { charges, clamp, cloudsIn, duckAt, duckRangeRight, ducksIn, hareShelters, launcherDirection, launchers, launchPosition, map, moon, rewardAt, skyCeiling, start, zone } from './world';
 import type { Charge, Point, Reward, RewardType, Setup } from './world';
 
 export type UiSprite = keyof typeof ui.frames;
@@ -282,12 +282,11 @@ function paintMoon(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, view:
   const axeAngle = -0.61;
   const axeScale = 0.49 * view.zoom;
   const axeInset = radius - 2.7 * view.zoom;
-  // Anchor the curved cutting edge using its outward normal in the atlas.
-  const bladeEdge = { x: 17, y: 67 };
-  const bladeNormal = Math.atan2(-16, 22);
+  // The atlas blade faces left, so its cutting edge points into the disk.
+  const bladeEdge = { x: 14, y: 28 };
   ctx.save();
   ctx.translate(center.x + Math.cos(axeAngle) * axeInset, center.y + Math.sin(axeAngle) * axeInset);
-  ctx.rotate(axeAngle - bladeNormal);
+  ctx.rotate(axeAngle);
   drawSprite(ctx, atlas, 'moon-axe', -bladeEdge.x * axeScale, -bladeEdge.y * axeScale, axeScale);
   ctx.restore();
 
@@ -325,11 +324,6 @@ function line(ctx: CanvasRenderingContext2D, view: Camera, points: readonly Poin
   ctx.stroke();
   ctx.setLineDash([]);
 }
-
-const hareShelters = [
-  { x: start.x - 88, scale: 0.50, facing: 1 },
-  { x: start.x + 190, scale: 0.54, facing: -1 },
-] as const;
 
 const harePaws = [
   { x: 35, y: 40, back: true, hind: true, stride: 0 },
@@ -511,6 +505,36 @@ function duckFall(hit: DuckHit, time: number): { position: Point; tumble: number
   };
 }
 
+function paintDucks(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, view: Camera, scene: Scene): void {
+  const margin = 30 * view.zoom;
+  const min = unproject(view, { x: -margin, y: view.height + margin });
+  const max = unproject(view, { x: view.width + margin, y: -margin });
+  const size = 0.235 * view.zoom;
+
+  function draw(position: Point, wingPhase: number, left: boolean, tumble = 0, opacity = 1): void {
+    const point = project(view, position);
+    if (!opacity || !inView(view, point, margin)) return;
+    ctx.save();
+    ctx.translate(point.x, point.y);
+    ctx.globalAlpha = opacity;
+    if (tumble) ctx.rotate(tumble);
+    if (left) ctx.scale(-1, 1);
+    drawSprite(ctx, atlas, Math.floor(wingPhase) % 2 ? 'duck-up' : 'duck-down', -56 * size, -66 * size, size);
+    ctx.restore();
+  }
+
+  for (const duck of ducksIn(min, max)) {
+    if (scene.duckHits?.has(duck.id)) continue;
+    const left = Math.cos(duck.phase + scene.targetTime * duck.speed) < 0;
+    draw(duckAt(duck, scene.targetTime), scene.targetTime * 6 + duck.id, left);
+  }
+  for (const [id, hit] of scene.duckHits ?? []) {
+    if (hit.position.x < min.x - 12 || hit.position.x > max.x + 12 || hit.position.y < min.y) continue;
+    const fall = duckFall(hit, scene.animationTime);
+    draw(fall.position, scene.animationTime * 6 + id, hit.direction < 0, fall.tumble, fall.opacity);
+  }
+}
+
 function drawCharge(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, view: Camera, charge: Charge, selected: boolean): void {
   const p = project(view, charge);
   const size = Math.max(view.zoom * 0.225, 0.085);
@@ -524,6 +548,39 @@ function drawCharge(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, view
     ctx.stroke();
   }
   drawSprite(ctx, atlas, charge.type, p.x - 36 * size, p.y - 41 * size, size);
+}
+
+const launcherArt = {
+  mortar: { basePivot: { x: 54, y: 34 }, baseScale: 0.37, barrelPivot: { x: 28, y: 39 }, barrelLength: 55 },
+  cannon: { basePivot: { x: 54, y: 38 }, baseScale: 0.40, barrelPivot: { x: 34, y: 36 }, barrelLength: 105 },
+} as const;
+
+function paintLauncher(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, view: Camera, setup: Setup, launchAge: number): void {
+  const { launcher } = setup;
+  if (launcher === 'none') {
+    const pad = project(view, { x: -44, y: 23 });
+    drawSprite(ctx, atlas, 'launch-pad', pad.x, pad.y, 0.40 * view.zoom);
+    return;
+  }
+
+  const { pivot, barrelLength } = launchers[launcher];
+  const root = project(view, pivot);
+  if (!inView(view, root, 65 * view.zoom)) return;
+  const art = launcherArt[launcher];
+  const baseScale = art.baseScale * view.zoom;
+  drawSprite(ctx, atlas, `${launcher}-base`, root.x - art.basePivot.x * baseScale, root.y - art.basePivot.y * baseScale, baseScale);
+
+  const direction = launcherDirection(setup, launcher);
+  const barrelScale = view.zoom * barrelLength / art.barrelLength;
+  const kick = launchAge >= 0 && launchAge < 420 ? Math.exp(-launchAge / 94) : 0;
+  const squash = kick > 0 ? kick * Math.cos(launchAge / 47) : 0;
+  ctx.save();
+  ctx.translate(root.x, root.y);
+  ctx.rotate(Math.atan2(-direction.y, direction.x));
+  ctx.translate(-3.5 * view.zoom * kick, 0);
+  ctx.scale(1 - 0.10 * squash, 1 + 0.32 * squash);
+  drawSprite(ctx, atlas, `${launcher}-barrel`, -art.barrelPivot.x * barrelScale, -art.barrelPivot.y * barrelScale, barrelScale);
+  ctx.restore();
 }
 
 function preparation(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, view: Camera, scene: Scene): void {
@@ -558,23 +615,11 @@ function preparation(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, vie
   }
 
   const { setup, selected, ghost, launchVector } = scene;
-  if (setup.launcher !== 'none') {
-    const p = project(view, setup.baron);
-    const scale = view.zoom * 0.29;
-    if (setup.launcher === 'cannon') {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(radians(36 - setup.cannonAngle));
-      drawSprite(ctx, atlas, 'cannon', -100 * scale, -23 * scale, scale);
-      ctx.restore();
-    } else drawSprite(ctx, atlas, 'mortar', p.x - 54 * scale, p.y - 22 * scale, scale);
-  }
-
   for (const item of setup.charges) {
     if (item !== ghost?.target) drawCharge(ctx, atlas, view, item, item === selected);
   }
   if (Math.hypot(launchVector.x, launchVector.y) > 1) {
-    const p = project(view, setup.baron);
+    const p = project(view, launchPosition(setup));
     const rotation = Math.atan2(-launchVector.y, launchVector.x);
     const scale = view.zoom * 0.25;
     ctx.save();
@@ -606,8 +651,7 @@ export function paint(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, vi
 
   line(ctx, view, scene.lastPath, '#fff5dfbd', true);
   line(ctx, view, scene.currentPath, '#ffe579ba', false);
-  const pad = project(view, { x: -44, y: 23 });
-  drawSprite(ctx, atlas, 'launch-pad', pad.x, pad.y, 0.40 * view.zoom);
+  paintLauncher(ctx, atlas, view, scene.setup, scene.baron.launchAge);
   paintHare(ctx, atlas, view, scene.now);
   paintHareShelters(ctx, atlas, view);
 
@@ -617,25 +661,7 @@ export function paint(ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, vi
     drawSprite(ctx, atlas, rewardSprites[reward.type], point.x - 45 * k, point.y - 134 * k, k);
   }
 
-  for (let i = 0; i < ducks.length; i++) {
-    const hit = scene.duckHits?.get(i);
-    const fall = hit ? duckFall(hit, scene.animationTime) : null;
-    if (fall?.opacity === 0) continue;
-    const point = project(view, fall?.position ?? duckAt(i, scene.targetTime));
-    if (point.x < -80 || point.x > view.width + 80 || point.y < -80 || point.y > view.height + 80) continue;
-    const size = 0.235 * view.zoom;
-    const left = hit ? hit.direction === -1 : Math.cos(ducks[i]!.phase + scene.targetTime * ducks[i]!.speed) < 0;
-    ctx.save();
-    ctx.translate(point.x, point.y);
-    if (fall) {
-      ctx.globalAlpha = fall.opacity;
-      ctx.rotate(fall.tumble);
-    }
-    if (left) ctx.scale(-1, 1);
-    const sprite = Math.floor((fall ? scene.animationTime : scene.targetTime) * 6 + i) % 2 ? 'duck-up' : 'duck-down';
-    drawSprite(ctx, atlas, sprite, -56 * size, -66 * size, size);
-    ctx.restore();
-  }
+  paintDucks(ctx, atlas, view, scene);
 
   paintPastures(ctx, atlas, view, scene);
   if (scene.mode === 'prepare') preparation(ctx, atlas, view, scene);
@@ -659,21 +685,29 @@ const mapMargin = 8;
 const groundStrip = 14;
 const minimapStart = { x: start.x, y: map.bottom };
 
-function minimapPoint(width: number, height: number, point: Point): Point {
-  const horizontal = clamp((point.x - map.left) / (map.right - map.left), 0, 1);
+function minimapBounds(cameraX: number): { left: number; right: number } {
+  const span = map.right - map.left;
+  const right = clamp(cameraX + span / 5, map.right, duckRangeRight);
+  return { left: right - span, right };
+}
+
+function minimapPoint(width: number, height: number, point: Point, bounds: ReturnType<typeof minimapBounds>): Point {
+  const horizontal = clamp((point.x - bounds.left) / (bounds.right - bounds.left), 0, 1);
   // Allocate more display space to low altitudes, where the first crates sit.
   const altitude = Math.sqrt(clamp((point.y - map.bottom) / (map.top - map.bottom), 0, 1));
   const ground = height - groundStrip;
   return { x: mapMargin + (width - mapMargin * 2) * horizontal, y: ground - (ground - mapMargin) * altitude };
 }
 
-export function fromMinimap(width: number, height: number, p: Point, targets: Pick<Scene, 'position' | 'visibleRewards' | 'targetTime'>): Point {
+export function fromMinimap(width: number, height: number, p: Point, cameraX: number, targets: Pick<Scene, 'position' | 'visibleRewards' | 'targetTime'>): Point {
+  const bounds = minimapBounds(cameraX);
   const crates = Array.from(targets.visibleRewards.values(), (reward) => rewardAt(reward, targets.targetTime));
-  const markers = [minimapStart, moon, ...crates, targets.position];
+  const markers = [minimapStart, moon, ...crates].filter((point) => point.x >= bounds.left && point.x <= bounds.right);
+  markers.push(targets.position);
   let closest: Point | undefined;
   let closestDistance = 4;
   for (const marker of markers) {
-    const projected = minimapPoint(width, height, marker);
+    const projected = minimapPoint(width, height, marker, bounds);
     const distance = Math.hypot(projected.x - p.x, projected.y - p.y);
     if (distance > closestDistance) continue;
     closest = marker;
@@ -684,18 +718,19 @@ export function fromMinimap(width: number, height: number, p: Point, targets: Pi
   const horizontal = clamp((p.x - mapMargin) / (width - mapMargin * 2), 0, 1);
   const ground = height - groundStrip;
   const altitude = clamp((ground - p.y) / (ground - mapMargin), 0, 1) ** 2;
-  return { x: map.left + (map.right - map.left) * horizontal, y: map.bottom + (map.top - map.bottom) * altitude };
+  return { x: bounds.left + (bounds.right - bounds.left) * horizontal, y: map.bottom + (map.top - map.bottom) * altitude };
 }
 
 export function paintMinimap(ctx: CanvasRenderingContext2D, view: Camera, scene: Scene, width: number, height: number): void {
+  const bounds = minimapBounds(view.x);
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = '#9dd8bb';
   ctx.fillRect(0, height - groundStrip, width, groundStrip);
   ctx.fillStyle = '#519784';
   ctx.fillRect(0, height - groundStrip, width, 1);
 
-  const bottomLeft = minimapPoint(width, height, unproject(view, { x: 0, y: view.height }));
-  const topRight = minimapPoint(width, height, unproject(view, { x: view.width, y: 0 }));
+  const bottomLeft = minimapPoint(width, height, unproject(view, { x: 0, y: view.height }), bounds);
+  const topRight = minimapPoint(width, height, unproject(view, { x: view.width, y: 0 }), bounds);
   const frameWidth = topRight.x - bottomLeft.x;
   const frameHeight = bottomLeft.y - topRight.y;
   if (frameWidth > 0 && frameHeight > 0) {
@@ -707,9 +742,13 @@ export function paintMinimap(ctx: CanvasRenderingContext2D, view: Camera, scene:
   }
 
   ctx.beginPath();
-  for (let i = 0; i < ducks.length; i++) {
-    if (scene.duckHits?.has(i)) continue;
-    const { x, y } = minimapPoint(width, height, duckAt(i, scene.targetTime));
+  const min = { x: bounds.left, y: map.bottom };
+  const max = { x: bounds.right, y: skyCeiling };
+  for (const duck of ducksIn(min, max)) {
+    if (scene.duckHits?.has(duck.id)) continue;
+    const spot = duckAt(duck, scene.targetTime);
+    if (spot.x < bounds.left || spot.x > bounds.right) continue;
+    const { x, y } = minimapPoint(width, height, spot, bounds);
     ctx.moveTo(x - 1.45, y);
     ctx.lineTo(x - 0.45, y + 0.8);
     ctx.lineTo(x + 1.45, y - 0.85);
@@ -719,7 +758,8 @@ export function paintMinimap(ctx: CanvasRenderingContext2D, view: Camera, scene:
   ctx.stroke();
 
   function marker(point: Point, color: string, size: number, diamond = false): void {
-    const { x, y } = minimapPoint(width, height, point);
+    if (point.x < bounds.left || point.x > bounds.right) return;
+    const { x, y } = minimapPoint(width, height, point, bounds);
     ctx.beginPath();
     if (diamond) {
       ctx.moveTo(x, y - size);
@@ -740,5 +780,5 @@ export function paintMinimap(ctx: CanvasRenderingContext2D, view: Camera, scene:
   for (const reward of scene.visibleRewards.values()) {
     marker(rewardAt(reward, scene.targetTime), reward.color, 2.1, reward.type === 'mortar' || reward.type === 'cannon');
   }
-  marker(scene.position, '#fff5df', 2.8);
+  marker({ x: clamp(scene.position.x, bounds.left, bounds.right), y: scene.position.y }, '#fff5df', 2.8);
 }

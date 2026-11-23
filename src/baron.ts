@@ -9,6 +9,7 @@ export interface BaronMotion {
   wigAge: number;
   landingAge: number;
   moonAge: number;
+  hop: number;
   mounted: number;
   stride: number;
 }
@@ -90,7 +91,7 @@ function arm(
 export function paintBaron(
   ctx: CanvasRenderingContext2D, atlas: HTMLImageElement, screen: Point, zoom: number, now: number, motion: BaronMotion,
 ): void {
-  const { facing, verticalSpeed, launchAge, wigAge, landingAge, moonAge, mounted, stride } = motion;
+  const { facing, verticalSpeed, launchAge, wigAge, landingAge, moonAge, hop, mounted, stride } = motion;
   const scale = zoom * ballRadius / 57;
   const breath = Math.sin(now * 0.0041);
   const bounce = Math.sin(stride) * mounted;
@@ -103,7 +104,7 @@ export function paintBaron(
   const cheer = ease(moonAge / 150) * (1 - ease((moonAge - 425) / 480));
   const headAngle = -0.033 * breath + 0.15 * fall - 0.14 * recoil + 0.13 * shake - 0.15 * pull;
   const headLift = -17 * pull;
-  const torsoAngle = 0.024 * breath - 0.24 * recoil + 0.23 * fall + 0.18 * squash + 0.10 * mounted + 0.042 * bounce;
+  const torsoAngle = 0.024 * breath - 0.24 * recoil + 0.23 * fall + 0.18 * squash + 0.10 * mounted + 0.042 * bounce + 0.19 * hop;
 
   ctx.save();
   ctx.translate(screen.x, screen.y);
@@ -116,7 +117,7 @@ export function paintBaron(
     drawSprite(ctx, atlas, 'cannonball', -62, -62, 1);
     ctx.restore();
   }
-  ctx.translate(0, 2.1 * breath + 17 * squash - 10 * pull + 73 * mounted + 2.5 * bounce);
+  ctx.translate(0, 2.1 * breath + 17 * squash - 10 * pull + 73 * mounted + 2.5 * bounce - 10 * hop);
   pivot(ctx, -17, -44, torsoAngle);
 
   ctx.save();
@@ -124,14 +125,14 @@ export function paintBaron(
   drawSprite(ctx, atlas, 'baron-tails', -108, -78, 1);
   ctx.restore();
   ctx.save();
-  pivot(ctx, 20, -41, -0.19 * recoil + 0.23 * fall + 0.39 * mounted - 0.11 * bounce);
+  pivot(ctx, 20, -41, -0.19 * recoil + 0.23 * fall + 0.39 * mounted - 0.11 * bounce - 0.36 * hop);
   drawSprite(ctx, atlas, 'baron-far-leg', 8, -52, 1);
   ctx.restore();
   ctx.save();
   arm(ctx, atlas, { x: 0, y: -87 }, { x: 27 + 6 * fall, y: -65 }, { x: 43 + 11 * fall, y: -47 - 15 * fall - 7 * mounted }, true);
   ctx.restore();
   ctx.save();
-  pivot(ctx, -23, -41, 0.17 * recoil - 0.19 * fall - 0.46 * mounted + 0.09 * bounce);
+  pivot(ctx, -23, -41, 0.17 * recoil - 0.19 * fall - 0.46 * mounted + 0.09 * bounce + 0.28 * hop);
   drawSprite(ctx, atlas, 'baron-near-leg', -60, -53, 1);
   ctx.restore();
   drawSprite(ctx, atlas, 'baron-coat', -40, -115, 1);

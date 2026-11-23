@@ -8,11 +8,11 @@ import type { Flight } from './flight';
 import { availableRewards, claim, isUnlock, loadProgress, saveProgress, startingProgress } from './progress';
 import { badge, fromMinimap, inventoryArt, paint, paintMinimap, project, unproject } from './render';
 import type { Camera, Effect, Scene, UiSprite } from './render';
-import { rideAt, startRide } from './return-ride';
-import type { HorseDeparture, ReturnRide, RidePose } from './return-ride';
+import { returnAt, startReturn } from './return-ride';
+import type { HorseDeparture, ReturnPose, ReturnTrip } from './return-ride';
 import { mountTutorial } from './tutorial';
 import type { TutorialStep } from './tutorial';
-import { canPlace, chargeLimit, chargeTypes, charges, clamp, copySetup, distance, insideZone, map, moon, rewardNames, start, startingSetup, step, zone } from './world';
+import { canPlace, chargeLimit, chargeTypes, charges, clamp, copySetup, distance, duckRangeRight, gravity, insideZone, launchers, launchPosition, map, moon, rewardNames, start, startingSetup, step, zone } from './world';
 import type { Charge, ChargeType, Launcher, Point } from './world';
 
 function element<T extends HTMLElement>(id: string): T {
@@ -37,8 +37,12 @@ const zoomOutButton = element<HTMLButtonElement>('zoom-out');
 const settingsDialog = element<HTMLDialogElement>('settings-dialog');
 const settingsMute = element<HTMLButtonElement>('settings-mute');
 const removeButton = element<HTMLButtonElement>('remove-charge');
+const clearChargesButton = element<HTMLButtonElement>('clear-charges');
 const launcherSelect = element<HTMLSelectElement>('launcher');
+const angleControl = element('angle-control');
+const angleLabel = element('angle-label');
 const angleInput = element<HTMLInputElement>('angle');
+const angleValue = element('angle-value');
 const inventory = element('inventory');
 const chargePreview = element('charge-preview');
 const result = element('result');
@@ -73,8 +77,8 @@ let tutorial: TutorialStep | null = null;
 let mode: Scene['mode'] = 'prepare';
 let flight: Flight | null = null;
 let finish: { since: number; moon: boolean; moonSplit: boolean } | null = null;
-let ride: ReturnRide | null = null;
-let rider: RidePose | null = null;
+let returnTrip: ReturnTrip | null = null;
+let returnPose: ReturnPose | null = null;
 let horseDeparture: HorseDeparture | null = null;
 let freeCamera = false;
 let trailVisible = true;
@@ -99,6 +103,7 @@ let initialZoom = 1;
 let handledTouch: { id: number; time: number } | null = null;
 
 const view: Camera = { x: 85, y: 110, width: 960, height: 540, zoom: initialZoom };
+const flightCameraLead: Point = { x: 0, y: 0 }; // Fractions of the viewport.
 const atlas = new Image();
 const audio = gameAudio();
 const formatter = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
@@ -152,7 +157,10 @@ function count(type: ChargeType): number {
 function startTutorial(): void {
   tutorial = !debugMode && !progress.tutorialSeen ? 'move' : null;
   if (!tutorial) return;
-  Object.assign(setup, { baron: { x: -32, y: 42 }, charges: [], launcher: 'none', cannonAngle: tutorialSetup.cannonAngle });
+  Object.assign(setup, {
+    baron: { x: -32, y: 42 }, charges: [], launcher: 'none',
+    cannonAngle: tutorialSetup.cannonAngle, mortarTilt: tutorialSetup.mortarTilt,
+  });
 }
 
 function guidingSetup(): boolean {
@@ -216,7 +224,7 @@ function updateTutorial(): void {
 }
 
 function currentPosition(): Point {
-  return rider?.position ?? flight?.position ?? setup.baron;
+  return returnPose?.position ?? flight?.position ?? launchPosition(setup);
 }
 
 function sceneryTime(now: number): number {
@@ -231,9 +239,23 @@ function updateHud(): void {
   updateText(moonDistance, progress.moonHits > 0 ? '✓' : meters(distance(currentPosition(), moon) - moon.radius));
   updateText(stageLabel, mode === 'flight' && flight
     ? `Altitude ${meters(flight.position.y)} · Peak ${meters(flight.height)} · Range ${meters(flight.range)} · Ducks ${flight.ducks.size}`
-    : rider ? rider.travel > 0 ? 'Heading Back' : 'Ride Incoming'
+    : returnPose?.kind === 'hop' ? 'Hopping Back'
+    : returnPose ? returnPose.travel > 0 ? 'Heading Back' : 'Ride Incoming'
     : mode === 'result' ? 'Moon'
     : freeCamera ? 'Free Camera' : 'Launch Site');
+}
+
+function updateLauncherAngle(): void {
+  const { launcher } = setup;
+  angleControl.hidden = launcher === 'none';
+  if (launcher === 'none') return;
+  const angle = launcher === 'mortar' ? setup.mortarTilt : setup.cannonAngle;
+  const { minAngle, maxAngle } = launchers[launcher];
+  angleInput.min = String(minAngle);
+  angleInput.max = String(maxAngle);
+  angleInput.value = String(angle);
+  updateText(angleLabel, launcher === 'mortar' ? 'Mortar Tilt' : 'Cannon Angle');
+  updateText(angleValue, `${launcher === 'mortar' && angle > 0 ? '+' : ''}${angle}°`);
 }
 
 function updateControls(): void {
@@ -248,11 +270,13 @@ function updateControls(): void {
   minimap.tabIndex = guided ? -1 : 0;
   minimap.setAttribute('aria-disabled', String(guided));
   homeButton.hidden = preparing && !freeCamera;
-  updateText(homeLabel, ride ? 'Skip Ride' : canFollow ? 'Follow Baron' : 'Back to Baron');
-  retryButton.hidden = !!ride;
+  updateText(homeLabel, returnTrip?.kind === 'hop' ? 'Skip Hop' : returnTrip ? 'Skip Ride' : canFollow ? 'Follow Baron' : 'Back to Baron');
+  retryButton.hidden = !!returnTrip;
   wigButton.hidden = mode !== 'flight' || !progress.unlocked.wig;
   wigButton.disabled = !!flight?.wigUsed || wigQueued;
   removeButton.hidden = guided || !selected;
+  clearChargesButton.hidden = guided;
+  clearChargesButton.disabled = setup.charges.length === 0;
   trailButton.setAttribute('aria-pressed', String(trailVisible));
 
   for (const [type, { button, label }] of slots) {
@@ -271,18 +295,18 @@ function updateControls(): void {
     if (option.value === 'mortar' || option.value === 'cannon') option.disabled = !progress.unlocked[option.value];
   }
   launcherSelect.value = setup.launcher;
-  element('angle-control').hidden = setup.launcher !== 'cannon';
-  angleInput.value = String(setup.cannonAngle);
-  updateText(element('angle-value'), `${setup.cannonAngle}°`);
+  updateLauncherAngle();
 
   updateText(hint, preparing
     ? selected ? 'Drag the charge back to the inventory to remove it.'
+      : setup.launcher !== 'none' ? 'Set the angle, arrange your charges and hit BOOM!'
       : freeCamera ? 'Drag the background to pan. Drag the Baron or charges to reposition them.'
       : progress.attempts === 0 ? 'Drag the Baron or move the charges. Hit BOOM! to try the starting setup.'
       : 'Pick a charge below and place it inside the box. The dotted trail shows your last flight.'
     : mode === 'flight' ? canFollow ? 'Drag to pan, or select Follow Baron to resume tracking.'
       : 'Drag the view or use the minimap and zoom controls to explore.'
-    : ride ? 'The Baron is heading back to your setup. Skip the ride to get there sooner.'
+    : returnTrip?.kind === 'hop' ? 'The Baron is hopping back to your setup.'
+    : returnTrip ? 'The Baron is heading back to your setup. Skip the ride to get there sooner.'
     : 'Try Again! takes you back to the same setup.');
   updateHud();
   updateTutorial();
@@ -293,7 +317,8 @@ function updateControls(): void {
 function homeCenterX(): number {
   const center = view.width / initialZoom > 380 ? 94 : 68;
   const room = Math.max(0, view.width / (2 * view.zoom) - (zone.right - zone.left) / 2);
-  return clamp(center, setup.baron.x - room, setup.baron.x + room);
+  const { x } = launchPosition(setup);
+  return clamp(center, x - room, x + room);
 }
 
 function groundViewY(): number {
@@ -302,27 +327,41 @@ function groundViewY(): number {
 
 function centerStartView(): void {
   view.x = homeCenterX();
-  view.y = Math.max(groundViewY(), setup.baron.y + Math.min(24, view.height / (4 * view.zoom)));
+  view.y = Math.max(groundViewY(), launchPosition(setup).y + Math.min(24, view.height / (4 * view.zoom)));
   dirty = true;
 }
 
 function focusBaron(snap = false, elapsed = 0): void {
   if (!flight) return;
   const position = currentPosition();
-  const sideRoom = view.width / (4 * view.zoom);
-  const ahead = clamp(flight.velocity.x * 0.22, -Math.min(60, sideRoom), Math.min(76, sideRoom));
+  const groundY = returnPose ? groundViewY() : view.height / (2 * view.zoom) - 24;
+  if (mode === 'flight') {
+    const lookAhead = 1.2;
+    const visibleWidth = view.width / view.zoom;
+    const visibleHeight = view.height / view.zoom;
+    const aheadX = flight.velocity.x * lookAhead / visibleWidth;
+    const aheadY = (flight.velocity.y - gravity * lookAhead / 2) * lookAhead / visibleHeight;
+    const limit = Math.max(1, Math.abs(aheadX) / 0.28, Math.abs(aheadY) / 0.26);
+    const share = snap ? 1 : 1 - Math.exp(-elapsed * 14);
+    // Track the Baron directly and ease only the lead so speed can't make the camera fall behind.
+    flightCameraLead.x += (aheadX / limit - flightCameraLead.x) * share;
+    flightCameraLead.y += (aheadY / limit - flightCameraLead.y) * share;
+    view.x = position.x + flightCameraLead.x * visibleWidth;
+    view.y = Math.max(groundY, position.y + flightCameraLead.y * visibleHeight);
+    return;
+  }
+
   const targetX = finish?.moonSplit ? moon.x - moon.radius * 0.2
-    : position.x + (rider && ride ? (homeCenterX() - ride.to.x) * rider.travel ** 4 : mode === 'flight' ? ahead : 0);
-  const groundY = rider ? groundViewY() : view.height / (2 * view.zoom) - 24;
+    : position.x + (returnPose && returnTrip ? (homeCenterX() - returnTrip.to.x) * returnPose.travel ** 4 : 0);
   const targetY = finish?.moonSplit ? moon.y - moon.radius * 0.1
     : Math.max(groundY, position.y + Math.min(24, view.height / (4 * view.zoom)));
-  const share = snap || (rider && rider.travel > 0) ? 1 : 1 - Math.exp(-elapsed * 9);
+  const share = snap || (returnPose && returnPose.travel > 0) ? 1 : 1 - Math.exp(-elapsed * 9);
   view.x += (targetX - view.x) * share;
   view.y += (targetY - view.y) * share;
 }
 
 function moveCamera(x: number, y: number): void {
-  view.x = clamp(x, map.left, Math.max(map.right, currentPosition().x));
+  view.x = clamp(x, map.left, duckRangeRight);
   view.y = clamp(y, 0, Math.max(map.top, currentPosition().y));
   dirty = true;
 }
@@ -403,10 +442,12 @@ canvas.addEventListener('pointerdown', (event) => {
     return;
   }
   const charge = guided ? null : nearestCharge(world);
-  const hero = tutorial !== 'charges' && Math.abs(world.x - setup.baron.x) <= 14 && world.y >= setup.baron.y - 10 && world.y <= setup.baron.y + 38;
+  const baron = launchPosition(setup);
+  const hero = tutorial !== 'charges' && Math.abs(world.x - baron.x) <= 14 && world.y >= baron.y - 10 && world.y <= baron.y + 38;
   if (tutorial === 'move' && !hero) return;
+  if (hero && !charge && setup.launcher !== 'none') return;
   if (charge || hero) {
-    const point = charge || setup.baron;
+    const point = charge || baron;
     selected = charge;
     if (charge) selectedType = charge.type;
     beginGesture(canvas, event, { kind: 'move', target: charge || 'baron', offset: { x: world.x - point.x, y: world.y - point.y } });
@@ -511,6 +552,13 @@ canvas.addEventListener('contextmenu', (event) => {
   if (item) removeCharge(item);
 });
 bindTap(removeButton, () => { if (selected) removeCharge(selected); });
+bindTap(clearChargesButton, () => {
+  if (mode !== 'prepare' || guidingSetup() || !setup.charges.length) return;
+  clearGesture();
+  setup.charges.length = 0;
+  selected = null;
+  updateControls();
+});
 
 bindTap(minimap, (event) => {
   if (guidingSetup()) return;
@@ -519,7 +567,7 @@ bindTap(minimap, (event) => {
   const point = fromMinimap(minimap.width, minimap.height, {
     x: (event.clientX - bounds.left - minimap.clientLeft) * minimap.width / minimap.clientWidth,
     y: (event.clientY - bounds.top - minimap.clientTop) * minimap.height / minimap.clientHeight,
-  }, { position: currentPosition(), visibleRewards, targetTime });
+  }, view.x, { position: currentPosition(), visibleRewards, targetTime });
   panCamera(point.x, Math.max(point.y, groundViewY()));
 });
 minimap.addEventListener('keydown', (event) => {
@@ -532,14 +580,18 @@ bindTap(trailButton, () => { trailVisible = !trailVisible; updateControls(); });
 bindTap(zoomInButton, () => zoom(1.25));
 bindTap(zoomOutButton, () => zoom(0.8));
 launcherSelect.addEventListener('change', () => {
+  if (mode !== 'prepare') return;
   const choice = launcherSelect.value as Launcher;
   if (choice === 'none' || progress.unlocked[choice]) setup.launcher = choice;
+  clearGesture();
   selected = null;
   updateControls();
 });
 angleInput.addEventListener('input', () => {
-  setup.cannonAngle = angleInput.valueAsNumber;
-  updateText(element('angle-value'), `${angleInput.value}°`);
+  if (mode !== 'prepare' || setup.launcher === 'none') return;
+  if (setup.launcher === 'mortar') setup.mortarTilt = angleInput.valueAsNumber;
+  else setup.cannonAngle = angleInput.valueAsNumber;
+  updateLauncherAngle();
   dirty = true;
 });
 
@@ -569,14 +621,18 @@ function play(): void {
   if (testReward) visibleRewards.set(testReward.type, testReward);
   effects = setup.charges.map((charge) => ({ sprite: 'launch-burst', point: charge, since: launchAt, duration: 480, size: 36 }));
   particles.clear();
-  const launchPoint = { x: setup.baron.x, y: Math.max(3, setup.baron.y - 15) };
-  if (setup.charges.length) {
+  const launchPoint = { ...launchPosition(setup) };
+  if (setup.launcher !== 'none') {
+    effects.push({ sprite: 'launch-burst', point: launchPoint, since: launchAt, duration: 480, size: 47 });
+  } else if (setup.charges.length) {
     const total = setup.charges.reduce((sum, charge) => ({ x: sum.x + charge.x, y: sum.y + charge.y }), { x: 0, y: 0 });
     launchPoint.x = total.x / setup.charges.length;
     launchPoint.y = total.y / setup.charges.length;
-  }
+  } else launchPoint.y = Math.max(3, launchPoint.y - 15);
   particles.burst('launch', launchPoint, launchAt);
   centerStartView();
+  flightCameraLead.x = (view.x - flight.position.x) * view.zoom / view.width;
+  flightCameraLead.y = (view.y - flight.position.y) * view.zoom / view.height;
   freeCamera = false;
   updateControls();
 }
@@ -608,9 +664,9 @@ function complete(completed: Flight, now: number): void {
   if (!finish.moon) {
     audio.play('landing');
     if (record) audio.play('record');
-    ride = startRide(completed.position, setup.baron, now, progress.attempts % 7 === 0);
-    rider = rideAt(ride, now);
-    if (!ride.deer) horseDeparture = null;
+    returnTrip = startReturn(completed.position, launchPosition(setup), now, progress.attempts % 7 === 0);
+    returnPose = returnAt(returnTrip, now);
+    if (returnTrip.kind === 'ride' && !returnTrip.deer) horseDeparture = null;
   } else audio.play('moon');
   if (freeCamera && (!reachedMoon || moonSplit)) {
     freeCamera = false;
@@ -634,8 +690,8 @@ function returnToStart(): void {
   if (tutorial === 'flight') tutorial = 'launch';
   flight = null;
   finish = null;
-  ride = null;
-  rider = null;
+  returnTrip = null;
+  returnPose = null;
   mode = 'prepare';
   visibleRewards = availableRewards(progress);
   wigQueued = false;
@@ -812,18 +868,22 @@ function frame(now: number): void {
   const flying = mode === 'flight' && !tutorialView.rewardDialog.open ? flight : null;
   audio.setFlightSpeed(flying ? Math.hypot(flying.velocity.x, flying.velocity.y) : null);
   if (flying) particles.wake(flying.position, flying.velocity, now);
-  if (ride) {
-    const wasMoving = !!rider?.travel;
-    rider = rideAt(ride, now);
-    if (!wasMoving && rider.travel > 0) audio.play(ride.deer ? 'deer' : 'horse');
-    if (rider.travel > 0 && rider.bounce < 1.25) particles.hooves(rider.position, rider.direction, now);
-    if (rider.travel === 1) {
-      if (!ride.deer) horseDeparture = { x: ride.to.x, since: now, direction: ride.direction };
+  if (returnTrip) {
+    const wasMoving = !!returnPose?.travel;
+    returnPose = returnAt(returnTrip, now);
+    if (returnPose.kind === 'ride' && returnPose.travel > 0) {
+      if (!wasMoving) audio.play(returnPose.deer ? 'deer' : 'horse');
+      if (returnPose.bounce < 1.25) particles.hooves(returnPose.position, returnPose.direction, now);
+    }
+    if (returnPose.travel === 1) {
+      if (returnPose.kind === 'ride' && !returnPose.deer) {
+        horseDeparture = { x: returnTrip.to.x, since: now, direction: returnTrip.direction };
+      }
       returnToStart();
     }
   }
   if (!freeCamera && mode !== 'prepare') focusBaron(false, elapsed);
-  if (finish && result.hidden && now - finish.since > (finish.moonSplit ? 1450 : 680)) result.hidden = false;
+  if (finish && returnTrip?.kind !== 'hop' && result.hidden && now - finish.since > (finish.moonSplit ? 1450 : 680)) result.hidden = false;
   if (!toast.hidden && now >= toastUntil) toast.hidden = true;
   if (now >= nextHud) { nextHud = now + 80; updateHud(); }
   // Limit idle redraws while keeping placement and camera movement responsive.
@@ -837,15 +897,17 @@ function frame(now: number): void {
   const launchVector = mode === 'prepare' ? impulse(setup) : { x: 0, y: 0 };
   const horizontalSpeed = flight?.velocity.x ?? launchVector.x;
   const moonAge = finish?.moon ? now - finish.since : Infinity;
+  const rider = returnPose?.kind === 'ride' ? returnPose : null;
   const scene: Scene = {
     setup, position: currentPosition(), mode, targetTime, now, visibleRewards,
     baron: {
-      facing: rider && rider.travel > 0 ? rider.direction : horizontalSpeed < -1e-6 ? -1 : 1,
+      facing: returnPose && returnPose.travel > 0 ? returnPose.direction : horizontalSpeed < -1e-6 ? -1 : 1,
       verticalSpeed: mode === 'flight' ? flight?.velocity.y ?? 0 : 0,
       launchAge: mode === 'flight' ? now - launchAt : Infinity,
       wigAge: mode === 'flight' ? now - wigAt : Infinity,
       landingAge: finish && !finish.moon ? now - finish.since : Infinity,
       moonAge,
+      hop: returnPose?.kind === 'hop' ? returnPose.lift : 0,
       mounted: rider?.mounted ?? 0,
       stride: rider?.stride ?? 0,
     },

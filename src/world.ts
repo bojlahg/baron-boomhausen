@@ -21,12 +21,24 @@ export const charges = {
 export type ChargeType = keyof typeof charges;
 export const chargeTypes = Object.keys(charges) as ChargeType[];
 export type Unlock = 'wig' | 'mortar' | 'cannon';
-export type Launcher = Exclude<Unlock, 'wig'> | 'none';
+export type LauncherType = Exclude<Unlock, 'wig'>;
+export type Launcher = LauncherType | 'none';
 export type RewardType = ChargeType | Unlock;
 export interface Charge extends Point { type: ChargeType }
-export interface Setup { baron: Point; charges: Charge[]; launcher: Launcher; cannonAngle: number }
+export interface Setup { baron: Point; charges: Charge[]; launcher: Launcher; cannonAngle: number; mortarTilt: number }
+
+export const launchers = {
+  mortar: { pivot: { x: -3, y: 21 }, barrelLength: 22, minAngle: -15, maxAngle: 15, defaultAngle: 0, force: 205 },
+  cannon: { pivot: { x: -29, y: 22 }, barrelLength: 42, minAngle: 0, maxAngle: 70, defaultAngle: 60, force: 165 },
+} as const;
+export const launcherBoost = 1.25;
+export const wigBoost = 47;
 
 export const start = { x: 0, y: 34 };
+export const hareShelters = [
+  { x: start.x - 88, scale: 0.50, facing: 1 },
+  { x: start.x + 190, scale: 0.54, facing: -1 },
+] as const;
 
 export function startingSetup(): Setup {
   return {
@@ -37,7 +49,8 @@ export function startingSetup(): Setup {
       { x: 3, y: 17, type: 'powder-charge' },
     ],
     launcher: 'none',
-    cannonAngle: 60,
+    cannonAngle: launchers.cannon.defaultAngle,
+    mortarTilt: launchers.mortar.defaultAngle,
   };
 }
 
@@ -49,10 +62,29 @@ export function insideZone(point: Point): boolean {
   return point.x >= zone.left && point.x <= zone.right && point.y >= zone.bottom && point.y <= zone.top;
 }
 
+export function launcherDirection(setup: Setup, launcher: LauncherType): Point {
+  if (launcher === 'mortar') {
+    const aim = radians(clamp(setup.mortarTilt, launchers.mortar.minAngle, launchers.mortar.maxAngle));
+    return { x: Math.sin(aim), y: Math.cos(aim) };
+  }
+  const aim = radians(clamp(setup.cannonAngle, launchers.cannon.minAngle, launchers.cannon.maxAngle));
+  return { x: Math.cos(aim), y: Math.sin(aim) };
+}
+
+export function launchPosition(setup: Setup): Point {
+  if (setup.launcher === 'none') return setup.baron;
+  const { pivot, barrelLength } = launchers[setup.launcher];
+  const direction = launcherDirection(setup, setup.launcher);
+  const distanceToBall = barrelLength + ballRadius * 0.62;
+  return { x: pivot.x + direction.x * distanceToBall, y: pivot.y + direction.y * distanceToBall };
+}
+
 export function canPlace(setup: Setup, point: Point, target: Charge | 'baron' | null): boolean {
   if (!insideZone(point)) return false;
-  if (target === 'baron') return point.y >= ballRadius + 4 && setup.charges.every((charge) => distance(charge, point) >= 8);
-  return distance(setup.baron, point) >= 8 && setup.charges.every((charge) => charge === target || distance(charge, point) >= 5.5);
+  if (target === 'baron') return setup.launcher === 'none' && point.y >= ballRadius + 4
+    && setup.charges.every((charge) => distance(charge, point) >= 8);
+  if (distance(setup.baron, point) < 8 || (setup.launcher !== 'none' && distance(launchPosition(setup), point) < 8)) return false;
+  return setup.charges.every((charge) => charge === target || distance(charge, point) >= 5.5);
 }
 
 export interface Reward extends Point {
@@ -230,8 +262,25 @@ interface DuckRoute extends Point {
   verticalPhase: number;
   verticalCycles: number;
   speed: number;
-  radius: number;
 }
+
+interface Duck extends DuckRoute { id: number }
+
+export const duckRadius = 6.5;
+const duckMinAltitude = map.bottom + 48;
+const homeDuckCount = 150;
+const duckFieldWidth = 1000;
+const ducksPerField = Math.round(homeDuckCount * duckFieldWidth / (map.right - map.left));
+
+// Maximum ballistic range at the full speed budget and highest launch point.
+// Counting each charge at full strength and the wig at launch bounds every layout.
+const flightSpeedBudget = chargeTypes.reduce((sum, type) => sum + charges[type].force * chargeLimit, 0)
+  + Math.max(launchers.mortar.force, launchers.cannon.force) * launcherBoost + wigBoost;
+const farthestLanding = zone.right + flightSpeedBudget
+  * Math.sqrt(flightSpeedBudget ** 2 + 2 * gravity * (zone.top - ballRadius)) / gravity;
+const duckFieldCount = Math.max(0, Math.ceil((farthestLanding - map.right) / duckFieldWidth));
+export const duckRangeRight = map.right + duckFieldCount * duckFieldWidth;
+export const duckCount = homeDuckCount + duckFieldCount * ducksPerField;
 
 function routeClearanceSquared(route: DuckRoute, flock: readonly DuckRoute[]): number {
   let nearest = Infinity;
@@ -243,17 +292,15 @@ function routeClearanceSquared(route: DuckRoute, flock: readonly DuckRoute[]): n
   return nearest;
 }
 
-function makeDuckRoutes(): DuckRoute[] {
-  const random = seededRandom(0xB00F);
-  const minimumAltitude = map.bottom + 48;
-  const radius = 6.5;
+function makeDuckRoutes(left: number, right: number, count: number, seed: number, firstId: number, flock: Duck[] = []): Duck[] {
+  const random = seededRandom(seed);
   function candidate(): DuckRoute {
     const span = 29 + random() * 42;
     const lift = 9 + random() * 23;
     return {
-      x: map.left + span + random() * (map.right - map.left - 2 * span),
-      y: minimumAltitude + lift + random() * (skyCeiling - minimumAltitude - 2 * lift),
-      span, lift, radius,
+      x: left + span + random() * (right - left - 2 * span),
+      y: duckMinAltitude + lift + random() * (skyCeiling - duckMinAltitude - 2 * lift),
+      span, lift,
       phase: random() * 2 * Math.PI,
       verticalPhase: random() * 2 * Math.PI,
       verticalCycles: random() < 0.28 ? 2 : 1,
@@ -261,9 +308,7 @@ function makeDuckRoutes(): DuckRoute[] {
     };
   }
 
-  // Reserve a low route within reach of the starting charges.
-  const flock: DuckRoute[] = [{ x: 102, y: 105, span: 38, lift: 13, radius, phase: 2.2, verticalPhase: 0, verticalCycles: 2, speed: 0.65 }];
-  while (flock.length < 150) {
+  while (flock.length < count) {
     let best = candidate();
     let clearance = routeClearanceSquared(best, flock);
     // Spread out the entire routes so they stay separated at every phase.
@@ -275,15 +320,45 @@ function makeDuckRoutes(): DuckRoute[] {
         clearance = score;
       }
     }
-    flock.push(best);
+    flock.push({ ...best, id: firstId + flock.length });
   }
   return flock;
 }
 
-export const ducks: readonly DuckRoute[] = makeDuckRoutes();
+// Reserve a low route within reach of the starting charges.
+const homeDucks = makeDuckRoutes(map.left, map.right, homeDuckCount, 0xB00F, 0, [
+  { id: 0, x: 102, y: 105, span: 38, lift: 13, phase: 2.2, verticalPhase: 0, verticalCycles: 2, speed: 0.65 },
+]);
+const duckFields = new Map<number, Duck[]>();
 
-export function duckAt(index: number, time: number): Point {
-  const duck = ducks[index]!;
+function duckField(index: number): Duck[] {
+  let flock = duckFields.get(index);
+  if (!flock) {
+    const left = map.right + index * duckFieldWidth;
+    const border = 22;
+    flock = makeDuckRoutes(left + border, left + duckFieldWidth - border, ducksPerField,
+      Math.imul(index + 1, 0x9E3779B1) ^ 0xD0C5, homeDuckCount + index * ducksPerField);
+    duckFields.set(index, flock);
+  }
+  return flock;
+}
+
+export function* ducksIn(min: Point, max: Point): Generator<Duck> {
+  if (max.y < duckMinAltitude || min.y > skyCeiling || max.x < map.left || min.x > duckRangeRight) return;
+  function* matching(flock: readonly Duck[]): Generator<Duck> {
+    for (const duck of flock) {
+      if (duck.x + duck.span < min.x || duck.x - duck.span > max.x
+        || duck.y + duck.lift < min.y || duck.y - duck.lift > max.y) continue;
+      yield duck;
+    }
+  }
+  if (min.x <= map.right) yield* matching(homeDucks);
+  const first = Math.max(0, Math.floor((min.x - map.right) / duckFieldWidth));
+  const last = Math.min(duckFieldCount - 1, Math.floor((max.x - map.right) / duckFieldWidth));
+  for (let index = first; index <= last; index++) yield* matching(duckField(index));
+}
+
+export function duckAt(duck: DuckRoute, time: number): Point {
   const phase = duck.phase + time * duck.speed;
   return { x: duck.x + Math.sin(phase) * duck.span, y: duck.y + Math.sin(phase * duck.verticalCycles + duck.verticalPhase) * duck.lift };
 }

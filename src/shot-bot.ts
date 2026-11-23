@@ -1,7 +1,7 @@
 import { advance, beginFlight, impulse } from './flight';
 import type { Flight } from './flight';
 import type { Progress } from './progress';
-import { ballRadius, canPlace, chargeRadius, charges, chargeTypes, clamp, distance, gravity, moon, start, step, zone } from './world';
+import { ballRadius, canPlace, chargeRadius, charges, chargeTypes, clamp, distance, gravity, launchers, launchPosition, moon, startingSetup, start, step, zone } from './world';
 import type { Point, Reward, RewardType, Setup } from './world';
 
 export type ShotTarget =
@@ -26,7 +26,7 @@ function placeCharges(base: Setup, thrust: Point, counts: Progress['counts']): S
   const speed = Math.hypot(thrust.x, thrust.y);
   if (speed < 1e-6) return base;
   const direction = { x: thrust.x / speed, y: thrust.y / speed };
-  const { baron } = base;
+  const baron = launchPosition(base);
   const room = Math.min(
     (direction.x > 0 ? baron.x - zone.left : zone.right - baron.x) / Math.abs(direction.x),
     (direction.y > 0 ? baron.y - zone.bottom : zone.top - baron.y) / Math.abs(direction.y),
@@ -76,25 +76,29 @@ function verify(setup: Setup, target: ShotTarget, until: number): boolean {
 
 export function buildShot(target: ShotTarget, inventory: Pick<Progress, 'counts' | 'unlocked'>): Setup | null {
   const center = target.kind === 'moon' ? moon : target.kind === 'reward' ? target.reward : target.point;
-  const heights = [start.y, 44];
-  const timeFactors = [1, 0.9, 1.1, 0.8, 1.2, 0.65, 1.4, 0.5, 1.65, 0.35, 0.25, 0.15];
-  for (const y of heights) {
-    const baron = { x: start.x, y };
-    const efficientTime = Math.sqrt(2 * distance(baron, center) / gravity);
-    const bases: Setup[] = [{ baron, launcher: 'none', cannonAngle: 60, charges: [] }];
-    if (inventory.unlocked.mortar) bases.push({ ...bases[0]!, launcher: 'mortar' });
-    if (inventory.unlocked.cannon) {
-      for (const cannonAngle of [30, 45, 60, 75, 90]) bases.push({ ...bases[0]!, launcher: 'cannon', cannonAngle });
+  const detached = { ...startingSetup(), charges: [] };
+  const bases: Setup[] = [detached, { ...detached, baron: { x: start.x, y: 44 } }];
+  if (inventory.unlocked.mortar) {
+    for (const mortarTilt of [0, launchers.mortar.minAngle, launchers.mortar.maxAngle]) {
+      bases.push({ ...detached, launcher: 'mortar', mortarTilt });
     }
-    for (const factor of timeFactors) {
+  }
+  if (inventory.unlocked.cannon) {
+    for (const cannonAngle of [launchers.cannon.minAngle, 15, 30, 45, launchers.cannon.defaultAngle, launchers.cannon.maxAngle]) {
+      bases.push({ ...detached, launcher: 'cannon', cannonAngle });
+    }
+  }
+  const timeFactors = [1, 0.9, 1.1, 0.8, 1.2, 0.65, 1.4, 0.5, 1.65, 0.35, 0.25, 0.15];
+  for (const factor of timeFactors) {
+    for (const base of bases) {
+      const baron = launchPosition(base);
+      const efficientTime = Math.sqrt(2 * distance(baron, center) / gravity);
       const time = Math.max(0.25, efficientTime * factor);
       // Aim at the midpoint of a crate's swing so the setup still works after waiting to fire.
       const velocity = { x: (center.x - baron.x) / time, y: (center.y - baron.y) / time + gravity * time / 2 };
-      for (const base of bases) {
-        const launch = impulse(base);
-        const setup = placeCharges(base, { x: velocity.x - launch.x, y: velocity.y - launch.y }, inventory.counts);
-        if (setup && (setup.charges.length > 0 || setup.launcher !== 'none') && verify(setup, target, time + step)) return setup;
-      }
+      const launch = impulse(base);
+      const setup = placeCharges(base, { x: velocity.x - launch.x, y: velocity.y - launch.y }, inventory.counts);
+      if (setup && (setup.charges.length > 0 || setup.launcher !== 'none') && verify(setup, target, time + step)) return setup;
     }
   }
   return null;
